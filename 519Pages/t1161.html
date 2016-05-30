@@ -1,0 +1,345 @@
+http://grokbase.com/t/r/r-help/1217sdrmqh/r-ssa-in-r
+<base href="http://grokbase.com/t/r/r-help/1217sdrmqh/r-ssa-in-r">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[R] SSA in R - Grokbase</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script><script type="text/javascript" src="/cc/gb2.js"></script>
+<link rel="stylesheet" type="text/css" href="/cc/gb3.css" />
+<link rel="canonical" href="/t/r/r-help/1217sdrmqh/r-ssa-in-r" /><link rel="alternate" type="application/rss+xml" title="RSS feed for r-help @ r-project.org" href="http://grokbase.com/g/r/r-help/feed" /><link rel="alternate" type="application/rss+xml" title="RSS feed for this discussion" href="http://grokbase.com/t/r/r-help/1217sdrmqh/r-ssa-in-r/feed" /><link rel="stylesheet" type="text/css" href="/cc/badges20.css" /><link rel="stylesheet" type="text/css" href="/cc/teambadges20.css" /><script type="text/javascript" src="/cc/jq/p/jquery.hotkeys.js"></script><link rel="stylesheet" type="text/css" href="/cc/jq/qtip2/jquery.qtip2.master.css" />
+<link rel="stylesheet" type="text/css" href="/cc/jq/qtip2/jquery.qtip2.min.css" />
+<script type="text/javascript" src="/cc/jq/qtip2/jquery.qtip2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a[href^="/user/"]').each(function() {
+		var url='/ucard/' + $(this).attr('href').split('/')[3] + '/r-help@r-project.org';
+		$(this).qtip({content:{text:'<img class="throbber" src="/cc/img/anim.throbber.gif" alt="Loading..." />',ajax:{url:url}},position:{at:'bottom center',my:'top center',viewport:$(window),effect:false},show:{solo:true},style:{classes:'ui-tooltip-wiki ui-tooltip-light ui-tooltip-shadow'}})
+	})
+});
+</script>
+	</head>
+<body itemscope itemtype="http://schema.org/WebPage"><a name="top"></a>
+
+	<!-- beg topbar -->
+	<div style="background-color:#efefef;padding:0.5em 0 0.5em 0;border-bottom:1px #ccc solid">
+		<div class="container theme-showcase" role="main">
+			<div class="row" style="padding:0.5em 0 0.5ems 0">
+				<div class="col-sm-6 col-md-6 col-lg-6">
+
+							<div itemprop="breadcrumb"><a href="/">Grokbase</a> <span class="inactive">&rsaquo;</span> <a href="/groups">Groups</a> <span class="inactive">&rsaquo;</span> <a href="/s/r">R</a> <span class="inactive">&rsaquo;</span> <a href="/g/r/r-help">r-help</a> <span class="inactive">&rsaquo;</span> <a href="/g/r/r-help/2012/01">January 2012</a></div>			
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6 pull-right">
+
+					<form style="float:right" class="topbar_search" action="/search" method="get"><input onclick="if (this.value=='search'){this.value='';return false;}" onblur="if (this.value==''){this.value='search';return false}" name="q" id="q" class="topbar_search" type="text" value="search" /></form>
+				
+					<span style="float:right;margin-right:1em">
+					<a href="/faq">FAQ</a> <script type="text/javascript">
+						gbOSch();
+					</script>
+					</span>
+
+				</div>
+			</div>
+		</div>
+	</div><!-- end topbar -->
+	
+	<div class="container theme-showcase" role="main" style="margin:1em auto">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+				<a href="/"><img src="http://grokbase.com/cc/img/logo_grokbase_ff.png" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md6 col-lg-6 pull-right">
+
+<ul class="nav nav-pills gb3-pill-top">
+  <li class="pull-right gb3-pill-top" role="presentation"><a href="/badges" class="gb3-pill-top" style="padding:0.3em 1em 0.3em 1em">Badges</a></li>
+  <li class="pull-right gb3-pill-top" role="presentation"><a href="/users" class="gb3-pill-top" style="padding:0.3em 1em 0.3em 1em">Users</a></li>
+  <li class="pull-right gb3-pill-top gb3-pill-top-active" role="presentation"><a href="/groups" class="gb3-pill-top" style="padding:0.3em 1em 0.3em 1em">Groups</a></li>
+</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<div style="clear:both;"></div>
+
+<div id="fb-root"></div>
+	<div class="main">
+
+
+	<!--iv class="sup2header"><h1 class="sup2header_text hl_y">[R] SSA in R</h1>
+
+	<div class="sup2buttons"><a href="http://grokbase.com/g/r/r-help/feed" title="RSS feed for r-help @ r-project.org"><img src="/ico/sbj/rss/24" /></a> <a href="/t/r/r-help/1217sdrmqh/r-ssa-in-r/feed" title="RSS feed for this dicussion"><img src="/ico/sbj/rss/24" /></a></div>
+	</div-->
+
+		<div class="container theme-showcase" role="main">
+			<div class="row" style="padding-bottom:1em">
+				<div class="col-sm-12">
+
+					<ul class="nav nav-tabs nav">
+						<li role="presentation" class="gb3-tab-pull-left"><h1 style="color:#000;font-size:120%;margin:0;padding:0;font-weight:bold">[R] SSA in R</h1></li>
+
+	<div class="sup2buttons" style="text-align:right"><a href="http://grokbase.com/g/r/r-help/feed" title="RSS feed for r-help @ r-project.org"><i class="fa fa-rss-square fa_rss_lg"></i></a> <a href="/t/r/r-help/1217sdrmqh/r-ssa-in-r/feed" title="RSS feed for this dicussion"><i class="fa fa-rss-square fa_rss_lg"></i></a></div>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	<!--div class="main_1"-->
+	<div class="container theme-showcase" role="main"><!-- begin main container -->
+		<div class="row" style="padding:0.5em 0 0.5ems 0"><!-- begin main row -->
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9"><!-- begin main col-1 -->
+
+						<div itemscope itemtype="http://schema.org/Article" class="highlightable" rel="20120107sdrmqh3r2j45h460t0vb4mjt80">
+			<div style="padding:0 0 0.5em 0">
+<table style="font-size:100%" border="0"><tr><td style="vertical-align:top" rowspan="2"><a href="/user/Marco/1HpPFzqHaBprP5YeSiVAch" title="Marco"><img class="av_md" src="/avatar/1HpPFzqHaBprP5YeSiVAch/40" alt="Marco" width="40" height="40" /></a></td><td style="padding-left:0.5em;vertical-align:top;white-space:nowrap"><span style="margin-top:-5px"><a href="/user/Marco/1HpPFzqHaBprP5YeSiVAch"><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="hl_y">Marco</span><meta itemprop="url" content="/user/Marco/1HpPFzqHaBprP5YeSiVAch"/></span></a></span></td><td style="width:100%"></td></tr><tr><td style="padding-left:0.5em" colspan="2"><a class="dt_y4" href="/g/r/r-help/2012/01">Jan 7, 2012 at 10:12 am</a></td>
+</tr></table>
+			</div>
+			<div style="clear:both"></div>
+			<meta itemprop="name" content=""/>
+			<meta itemprop="interactionCount" content="UserComments:0"/>
+			<div class="m_body m_body_one hl_y" itemprop="articleBody">Hi everyone<br />I&#39;m here with a brief question:<br />Does anyone have some idea on how to perform Smallest Space Analysis in R?<br />I&#39;m aware of several packages/methods for non metric multidimensional<br />scaling, but no clue about this specific technique.<br /><br />Thanks for any feedback<br /><br />Marco<br /><a id="qc_20120107sdrmqh3r2j45h460t0vb4mjt80_z__ctl" class="qc_ctl" href="#"></a><div id="qc_20120107sdrmqh3r2j45h460t0vb4mjt80_z" class="qc_cnt"><br />--<br />View this message in context: <a href="http://r.789695.n4.nabble.com/SSA-in-R-tp4272568p4272568.html" rel="nofollow">http://r.789695.n4.nabble.com/SSA-in-R-tp4272568p4272568.html</a><br />Sent from the R help mailing list archive at Nabble.com.</div></div>
+			<div style="margin-top:1em"><a href="mailto:r-help%40r-project.org?In-Reply-To=%3C1325931129501-4272568.post%40n4.nabble.com%3E&Subject=%5BR%5D%20SSA%20in%20R">reply</a></div>
+			<div style="clear:both"></div>
+		</div>
+
+<table border="0" style="margin:0;padding:4px 0 0 0;">
+<tr><td style="text-align:top">
+<div class="fb-like" data-href="http://grokbase.com/p/r/r-help/1217sdrmqh" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+</td><td style="text-align:top">
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical">Tweet</a>
+</td><td style="padding-left:10px;text-align:top">
+<g:plusone size="tall"></g:plusone>
+</td><td style="padding-left:10px;text-align:top">
+<script type="text/javascript" src="http://www.reddit.com/static/button/button2.js"></script>
+</td></tr>
+</table>
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+
+		
+		<div><h2 style="font-weight:bold;color:#000;font-size:130%">Search Discussions</h2></div>
+		<div class="input-group" style="width:50%">
+			<form action="/search" id="gcse_g_search">
+				<input type="text" name="q" class="form-control" placeholder="Search for..." value="" />
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit">Search</button>
+				</span>
+				<input id="sch1_gfa" type="radio" name="f" value="aa/site" /> <label for="sch1_gfa">All Groups</label> <input id ="sch1_gf" type="radio" name="f" value="gt/r/r-help" checked="checked" /> <label for="sch1_gf">r-help</label>			</form>
+		</div><!-- /input-group -->
+
+			<div><h2>Related Discussions</h2></div><div><div id="related_discussions" style="padding-bottom:1em"><ul class="bullet">				<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/08aapb8yck/r-multi-scale-singular-spectrum-analysis-ssa" title="Hi everybody! I am searching for an R implementation of multi-scale singular spectrum analysis (SSA), which was introduced by Yiou etal (2000) (Data-adaptive wavelets and multi-scale ...">[R] multi-scale singular spectrum analysis (SSA)</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/08aa4swepm/r-multi-scale-ssa-singular-spectrum-analysis" title="An embedded and charset-unspecified text was scrubbed... Name: not available URL: &lt;https://stat.ethz.ch/pipermail/r-help/attachments/20081010/e14ba9b5/attachment.pl">[R] Multi-scale SSA (singular spectrum analysis)</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/045scabkvp/r-agnes-and-hclust" title="Hi, I want to know if there is a difference between the two hierarchical methods Agnes and hclust when there are used with the same method and the same metric on the same data! I ask this question ...">[R] Agnes and Hclust</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/045sjzde62/r-question" title="[R]:Agnes vs Hclust Hi, I want to know if there is a difference between the two hierarchical methods Agnes and hclust when there are used with the same method and the same metric on the same data! I ...">[R] Question</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/04ab216qwg/r-plot-hclust-canberra-dist-median-linkage" title="Gives strange results. I get &#39;weird&#39; dendrograms with canberra / binary distance metric and median / centroid cluster methods. Is this just my data? Dan">[R] plot hclust - canberra dist + median linkage</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/117s84ma1t/r-smallest-space-analysis" title="Hi everyone just a brief question: I&#39;m trying to perform a smallest space analysis on nonmetric variables with R. It seems there are at lear a couple of packages to perform non metric MDS but still ...">[R] smallest space analysis</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/092de6ynej/r-graph-edit-distance" title="Dear R Users I&#39;m trying to acquire a metric for how similar two graphs are by doing inexact graph matching. I heard that the &quot;Graph Edit Distance&quot; is one such metric. Do you know of any R packages ...">[R] Graph Edit Distance</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/0427q13vd1/r-knn-using-custom-distance-metric" title="Hi, There are two packages providing knn classification: class and knnTree. However, it seems both uses Eucleadian distances only. How can I uses a custom distance function with either package? ...">[R] knn using custom distance metric</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/057njtx4sv/r-principal-component-analysis-in-affy" title="Hi, I have been using the prcomp function to perform PCA on my example microarray data, (stored in metric text files) which looks like this: 1a 1b 1c 1d 1e 1f ...">[R] principal component analysis in affy</a></span></li>
+							<li style="margin-bottom:0.3em"><span><a class="hl_y" style="font-weight:bold" href="/t/r/r-help/047hw3b796/r-r-question-about-spectrum-metric" title="Dear R community, I would like to conduct a simulation study that involves the generation and recovery of times series spectra. Spectrum analysis is a new area for me so I am very much in the ...">[R] R question about spectrum metric</a></span></li>
+			</ul></div></div>
+			<!--/div><- main_1 -->
+	<!--div class="main_2"><- class="main_2"-->
+
+			</div><!-- end main col-1 -->
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3"><!-- begin main col-2 -->
+
+
+		<div class="sb_box">
+			<div class="sb_box_header">Discussion Navigation</div>
+			<table>
+				<tr><td class="sb_tbl_key">view</td><td class="sb_tbl_val"><span class="current">thread</span> <span class="inactive">|</span> <a href="/p/r/r-help/1217sdrmqh/r-ssa-in-r">post</a></td></tr>
+		</table></div>
+		<div class="sb_box">
+			<div class="sb_box_header">Discussion Overview</div>
+			<table>
+				<tr><td class="sb_tbl_key">group</td><td class="sb_tbl_val"><a href="/g/r/r-help">r-help</a> <a style="display:none" href="/g/r">@<br />
+<b>Notice</b>:  Undefined variable: pl_domain_short in <b>/home/whirl/sites/grokbase/root/www/public_html__www/cc/flow/tpc.main.php</b> on line <b>1605</b><br />
+</a>
+										</td></tr>
+				<tr><td class="sb_tbl_key">categories</td><td class="sb_tbl_val"><a href="/s/r">r</a></td></tr>				<tr><td class="sb_tbl_key">posted</td><td class="sb_tbl_val"><a class="dt_y2" href="/g/r/r-help/2012/01">Jan 7, '12 at 10:12a</a></td></tr>
+				<tr><td class="sb_tbl_key">active</td><td class="sb_tbl_val"><a class="dt_y2" href="/g/r/r-help/2012/01">Jan 7, '12 at 10:12a</a></td></tr>
+				<tr><td class="sb_tbl_key">posts</td><td class="sb_tbl_val">1</td></tr>
+				<tr><td class="sb_tbl_key">users</td><td class="sb_tbl_val">1</td></tr>
+				<tr><td class="sb_tbl_key">website</td><td class="sb_tbl_val"><a class="external" href="http://r-project.org">r-project.org</a></td></tr>
+							<tr><td class="sb_tbl_key">irc</td><td class="sb_tbl_val"><a class="external" href="irc://irc.freenode.org:8001/r">#r</a></td></tr>
+						</table>
+		</div>
+		<div class="sb_box" id="sb_preferences" style="display:none" onmouseover="$('.sb_pref_hints').css('display','');" onmouseout="$('.sb_pref_hints').css('display','none');">
+			<div class="sb_box_header">Preferences</div>
+		
+			<table style="width:100%">
+				<tr><td class="sb_tbl_key">responses</td>
+					<td class="sb_tbl_val"><a id="ctl_rbody_showhide" href="#" onclick="if ($('div.rbody').css('display') == 'none') {$('.tr_head_thin').css('display','none');$('.rbody').css('display','');$('#ctl_rbody_showhide').html('expanded');setCookie('rbody','s')} else {$('.rbody').css('display','none');$('.tr_head_thin').css('display','');$('#ctl_rbody_showhide').html('collapsed');setCookie('rbody','h')}; return false;">expanded</a>
+				</td>
+				<td class="sb_tbl_val sb_tbl_rt inactive sb_pref_hints" style="display:none">Hotkey:&nbsp;s</td></tr>
+				<tr><td class="sb_tbl_key">font</td>
+					<td class="sb_tbl_val"><a id="ctl_font" href="#" onclick="if ( $('div.m_body').css('font-family').match(/monospace/) ) { $('div.m_body').css('font-family','');$('div.m_body').css('font-size','90%');$('#ctl_font').html('variable');setCookie('font','v') } else { $('div.m_body').css('font-family','DejaVu Sans Mono,Lucida Console,Monaco,courier new,courier,monospace');$('div.m_body').css('font-size','80%');$('#ctl_font').html('fixed');setCookie('font','f') } ;return false;">variable</a>
+				</td>
+				<td class="sb_tbl_val sb_tbl_rt inactive sb_pref_hints" style="display:none">Hotkey:&nbsp;f</td></tr>
+
+
+				<tr><td class="sb_tbl_key">user style</td>
+				<td class="sb_tbl_val"><a id="ctl_ulist_style" href="#" onclick="uPrefs.tog_sb_u_style();return false">avatars</a></td>
+				<td class="sb_tbl_val sb_tbl_rt inactive sb_pref_hints" style="display:none">Hotkey:&nbsp;a</td></tr>
+			</table>
+		</div>
+
+
+		<div id="user_list_content">
+			<h3>1 user in discussion</h3>
+			<div id="user_list_avatars" style="width:100%;padding-left:10px">
+		
+			<a href="/user/Marco/HpPFzqHaBprP5YeSiVAch" title="Marco: 1 post"><img class="av_40" src="/avatar/HpPFzqHaBprP5YeSiVAch/40" alt="Marco: 1 post" width="40" height="40" /></a>
+
+						</div><div id="user_list_names" class="hl_y" style="display:none">
+					<a style="margin-top:-3px" href="/user/Marco/HpPFzqHaBprP5YeSiVAch" title="Marco: 1 post">Marco (1)</a><br />
+						</div><div style="clear:both;height:1em"></div>
+		</div>
+		
+					<!--/div><-- sb/main_2 -->
+			</div><!-- end main col-2 -->
+		</div><!-- end main row -->
+	</div><!-- end main container -->
+
+<script type="text/javascript">
+//<![CDATA[
+var dt=new dateTime;dt.init();$('a.dt_y2').each(function(index){var dtl=dt.local_text_for_any($(this).html(),1,1);if(dtl.length)$(this).html(dtl);});
+$('.dt_y4').each(function(index){var dtl=dt.local_text_for_any($(this).html());if(dtl.length)$(this).html(dtl);});
+
+$(document).bind('keydown','s',function(){if ($('div.rbody').css('display') == 'none') {$('.tr_head_thin').css('display','none');$('.rbody').css('display','');$('#ctl_rbody_showhide').html('expanded');setCookie('rbody','s')} else {$('.rbody').css('display','none');$('.tr_head_thin').css('display','');$('#ctl_rbody_showhide').html('collapsed');setCookie('rbody','h')}});
+$(document).bind('keydown','d',function(){uPrefs.tog_sb_u_list()});
+$(document).bind('keydown','a',function(){uPrefs.tog_sb_u_style()});
+$(document).bind('keydown','f',function(){if($('div.m_body').css('font-family').match(/monospace/) ) { $('div.m_body').css('font-family','');$('div.m_body_one').css('font-size','100%');$('div.m_body_resp').css('font-size','90%');$('#ctl_font').html('variable');setCookie('font','v') } else { $('div.m_body').css('font-family','DejaVu Sans Mono,Lucida Console,Monaco,courier new,courier,monospace');$('div.m_body').css('font-size','90%');$('#ctl_font').html('fixed');setCookie('font','f')};});
+
+$('#sb_preferences').css('display','');
+//var tPgFwd    = new pgFwd(,); tPgFwd.init();
+var iRToggler = new rToggler;iRToggler.init();
+var iQToggler = new qToggler;iQToggler.init("t");
+if (getCookie('font')=='f') {$('div.m_body').css('font-family','DejaVu Sans Mono,Lucida Console,Monaco,courier new,courier,monospace');$('div.m_body').css('font-size','80%');$('#ctl_font').html('fixed');};
+var uPrefs = new user_prefs('t');uPrefs.init();
+//if (getCookie('ustyle')=='n')   {$('#user_list_avatars').css('display','none');$('#user_list_names').css('display','');$('#ctl_ulist_style').html('names');};
+//]]>
+</script>
+
+</div><!-- main -->
+<div style="clear:both"></div>
+
+	<div style="clear:both;height:1em"></div>
+
+	<!-- beg footer -->
+	<div style="background-color:#efefef;margin-top:1em;padding-top:1em;border-top:1px #ddd solid">
+		<div class="container theme-showcase" role="main">
+			<div class="row" style="padding-bottom:1em">
+
+				<div class="col-sm-3 col-md-3 col-lg-3">
+					<p class="text-muted b">Content</p>
+					<ul class="list-unstyled">
+						<li><a href="/">Home</a></li>
+						<li><a href="/groups">Groups &amp; Organizations</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3">
+					<p class="text-muted b">People</p>
+					<ul class="list-unstyled">
+						<li><a href="/users">Users</a></li>
+						<li><a href="/groups">Badges</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3">
+					<p class="text-muted b">Support</p>
+					<ul class="list-unstyled">
+						<li><a href="/welcome">Welcome</a></li>
+						<li><a href="/faq">FAQ</a></li>
+						<li><a href="/faq#miscellaneous__contact">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3">
+
+					<p class="text-muted b">Translate</p>
+
+<div id="google_translate_element"></div><script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'auto',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+				</div>
+			</div>
+		</div>
+		<div class="container theme-showcase" role="main">
+			<div class="row" style="padding-bottom:1em">
+
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<p>site design / logo &copy; 2015 Grokbase
+
+
+				</div>
+			</div>
+		</div>
+	</div><!-- end footer -->
+
+
+<!--
+<div id="footer_sep"></div>
+<div id="footer">
+	<div id="footer_content">
+	<div id="footer_col1">
+		<h3>Content</h3>
+		<ul class="bullet">
+			<li><a href="/">Home</a></li>
+			<li><a href="/groups">Groups &amp; Organizations</a></li>
+		</ul>
+	</div>
+	<div id="footer_col2">
+		<h3>People</h3>
+		<ul class="bullet">
+			<li><a href="/users">Users</a></li>
+			<li><a href="/badges">Badges</a></li>
+		</ul>
+	</div>
+	<div id="footer_col3">
+		<h3>Support</h3>
+		<ul class="bullet">
+			<li><a href="/welcome">Welcome</a></li>
+			<li><a href="/faq">F.A.Q.</a></li>
+			<li><a href="/faq#miscellaneous__contact">Contact Us</a></li>
+		</ul>
+	</div>
+	<div id="footer_coln">
+
+		<h3>Translate</h3>
+
+<div id="google_translate_element"></div><script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'auto',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	</div>
+
+	<div style="clear:both"></div>
+
+	<p id="copy">site design / logo &copy; 2014 Grokbase</p>
+	</div>
+</div>
+-->
+</div>
+<script type="text/javascript">
+$('.dh').show();
+</script>
+</body></html>

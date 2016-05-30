@@ -1,0 +1,450 @@
+http://www.studiorang.com/bbs/zboard.php?id=booking&page=43&page_num=20&category=&sn=off&ss=on&sc=on&keyword=&prev_no=1119&sn1=&divpage=1&select_arrange=headnum&desc=asc
+<base href="http://www.studiorang.com/bbs/zboard.php?id=booking&page=43&page_num=20&category=&sn=off&ss=on&sc=on&keyword=&prev_no=1119&sn1=&divpage=1&select_arrange=headnum&desc=asc">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+	<html>
+
+<head>
+	<title></title>
+	<meta http-equiv=Content-Type content=text/html; charset=EUC-KR>
+	<link rel=StyleSheet HREF=skin/uks_board_v1070/style.css type=text/css title=style>
+	<script language='JavaScript'>
+	var select_obj;
+	function ZB_layerAction(name,status) { 
+		var obj=document.all[name];
+		var _tmpx,_tmpy, marginx, marginy;
+		_tmpx = event.clientX + parseInt(obj.offsetWidth);
+		_tmpy = event.clientY + parseInt(obj.offsetHeight);
+		_marginx = document.body.clientWidth - _tmpx;
+		_marginy = document.body.clientHeight - _tmpy ;
+		if(_marginx < 0)
+			_tmpx = event.clientX + document.body.scrollLeft + _marginx ;
+		else
+			_tmpx = event.clientX + document.body.scrollLeft ;
+		if(_marginy < 0)
+			_tmpy = event.clientY + document.body.scrollTop + _marginy +20;
+		else
+			_tmpy = event.clientY + document.body.scrollTop ;
+		obj.style.posLeft=_tmpx-13;
+		obj.style.posTop=_tmpy-12;
+		if(status=='visible') {
+			if(select_obj) {
+				select_obj.style.visibility='hidden';
+				select_obj=null;
+			}
+			select_obj=obj;
+		}else{
+			select_obj=null;
+		}
+		obj.style.visibility=status; 
+	}
+
+
+	function print_ZBlayer(name, homepage, mail, member_no, boardID, writer, traceID, traceType, isAdmin, isMember) {
+		var printHeight = 0;
+		var printMain="";
+	
+		if(homepage) {
+			printMain = "<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('"+homepage+"');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_homepage.gif border=0 align=absmiddle>&nbsp;&nbsp;홈페이지&nbsp;&nbsp;</td></tr>";
+			printHeight = printHeight + 16;
+		}
+		if(mail) {
+			printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('open_window.php?mode=m&str="+mail+"','ZBremote','width=1,height=1,left=1,top=1');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_mail.gif border=0 align=absmiddle>&nbsp;&nbsp;메일 보내기&nbsp;&nbsp;</td></tr>";
+			printHeight = printHeight + 16;
+		}
+		if(member_no) {
+			if(isMember) {
+				printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('view_info.php?member_no="+member_no+"','view_info','width=400,height=510,toolbar=no,scrollbars=yes');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_memo.gif border=0 align=absmiddle>&nbsp;&nbsp;쪽지 보내기&nbsp;&nbsp;</td></tr>";
+				printHeight = printHeight + 16;
+			}
+			printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('view_info2.php?member_no="+member_no+"','view_info','width=400,height=510,toolbar=no,scrollbars=yes');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_information.gif border=0 align=absmiddle>&nbsp;&nbsp;회원정보 보기&nbsp;&nbsp;</td></tr>";
+			printHeight = printHeight + 16;
+		}
+		if(writer) {
+			printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=location.href='zboard.php?id="+boardID+"&sn1=on&sn=on&ss=off&sc=off&keyword="+writer+"';><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_search.gif border=0 align=absmiddle>&nbsp;&nbsp;이름으로 검색&nbsp;&nbsp;</td></tr>";
+			printHeight = printHeight + 16;
+		}
+		if(isAdmin) {
+			if(member_no) {
+				printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('open_window.php?mode=i&str="+member_no+"','ZBremote','width=1,height=1,left=1,top=1');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_modify.gif border=0 align=absmiddle>&nbsp;&nbsp;<font color=darkred>회원정보 변경&nbsp;&nbsp;</td></tr>";
+				printHeight = printHeight + 16;
+			}
+			printMain = printMain +	"<tr onMouseOver=this.style.backgroundColor='#bbbbbb' onMouseOut=this.style.backgroundColor='' onMousedown=window.open('open_window.php?mode="+traceType+"&str="+traceID+"','ZBremote','width=1,height=1,left=1,top=1');><td style=font-family:굴림;font-size:9pt height=18 nowrap>&nbsp;<img src=images/n_relationlist.gif border=0 align=absmiddle>&nbsp;&nbsp;<font color=darkred>관련글 추적</font>&nbsp;&nbsp;</td></tr>";
+			printHeight = printHeight + 16;
+		
+		}
+		var printHeader = "<div id='"+name+"' style='position:absolute; left:10px; top:25px; width:127; height: "+printHeight+"; z-index:1; visibility: hidden' onMousedown=ZB_layerAction('"+name+"','hidden')><table border=0><tr><td colspan=3 onMouseover=ZB_layerAction('"+name+"','hidden') height=3></td></tr><tr><td width=5 onMouseover=ZB_layerAction('"+name+"','hidden') rowspan=2>&nbsp;</td><td height=5></td></tr><tr><td><table style=cursor:hand border='0' cellspacing='1' cellpadding='0' bgcolor='black' width=100% height=100%><tr><td valign=top bgcolor=white><table border=0 cellspacing=0 cellpadding=3 width=100% height=100%>";
+		var printFooter = "</table></td></tr></table></td><td width=5 rowspan=2 onMouseover=ZB_layerAction('"+name+"','hidden')>&nbsp;</td></tr><tr><td colspan=3 height=10 onMouseover=ZB_layerAction('"+name+"','hidden')></td></tr></table></div>";
+	
+		document.writeln(printHeader+printMain+printFooter);
+	}
+</script>
+	
+<script language="javascript">
+browserName = navigator.appName;
+browserVer = parseInt(navigator.appVersion);
+if(browserName == "Netscape" && browserVer >= 3){ init = "net"; }
+else { init = "ie"; }
+
+
+if(((init == "net")&&(browserVer >=3))||((init == "ie")&&(browserVer >= 4))){
+
+ sn_on=new Image;
+ sn_off=new Image;
+ sn_on.src= "skin/uks_board_v1070/name_on.gif";
+ sn_off.src= "skin/uks_board_v1070/name_off.gif";
+
+ ss_on=new Image;
+ ss_off=new Image;
+ ss_on.src= "skin/uks_board_v1070/subject_on.gif";
+ ss_off.src= "skin/uks_board_v1070/subject_off.gif";
+
+ sc_on=new Image;
+ sc_off=new Image;
+ sc_on.src= "skin/uks_board_v1070/content_on.gif";
+ sc_off.src= "skin/uks_board_v1070/content_off.gif";
+
+}
+
+function OnOff(name) {
+if(((init == "net")&&(browserVer >=3))||((init == "ie")&&(browserVer >= 4))) {
+  if(document.search[name].value=='on')
+  {
+   document.search[name].value='off';
+   ImgSrc=eval(name+"_off.src");
+   document[name].src=ImgSrc;
+  }
+  else
+  {
+   document.search[name].value='on';
+   ImgSrc=eval(name+"_on.src");
+   document[name].src=ImgSrc;
+  }
+ }
+}
+</script>
+
+<script language="javascript">
+  function reverse() {
+   var i, chked=0;
+   if(confirm('목록을 반전하시겠습니까?\n\n반전을 원하지 않는다면 취소를 누르시면 다음으로 넘어갑니다'))
+   {
+    for(i=0;i<document.list.length;i++)
+    {
+     if(document.list[i].type=='checkbox')
+     {
+      if(document.list[i].checked) { document.list[i].checked=false; }
+      else { document.list[i].checked=true; }
+     }
+    }
+   }
+   for(i=0;i<document.list.length;i++)
+   {
+    if(document.list[i].type=='checkbox')
+    {
+     if(document.list[i].checked) chked=1;
+    }
+   }
+   if(chked) {
+    if(confirm('선택된 항목을 보시겠습니까?'))
+     {
+      document.list.selected.value='';
+      document.list.exec.value='view_all';
+      for(i=0;i<document.list.length;i++)
+      {
+       if(document.list[i].type=='checkbox')
+       {
+        if(document.list[i].checked)
+        {
+         document.list.selected.value=document.list[i].value+';'+document.list.selected.value;
+        }
+       }
+      }
+      document.list.submit();
+      return true;
+     }
+    }
+   }
+
+ function delete_all() {
+  var i, chked=0;
+  for(i=0;i<document.list.length;i++)
+  {
+   if(document.list[i].type=='checkbox')
+   {
+    if(document.list[i].checked) chked=1;
+    }
+   }
+  if(chked)
+  {
+    document.list.selected.value='';
+    document.list.exec.value='delete_all';
+    for(i=0;i<document.list.length;i++)
+    {
+     if(document.list[i].type=='checkbox')
+     {
+      if(document.list[i].checked)
+      {
+       document.list.selected.value=document.list[i].value+';'+document.list.selected.value;
+      }
+     }
+    }
+    window.open("select_list_all.php?id=booking&selected="+document.list.selected.value,"게시물정리","width=260,height=180,toolbars=no,resize=no,scrollbars=no");
+  }
+  else {alert('정리할 게시물을 선택하여 주십시요');}
+ }
+
+ function category_change(obj) {
+  var myindex=obj.selectedIndex;
+  document.search.category.value=obj.options[myindex].value;
+  document.search.submit();
+  return true;
+ }
+
+//-->
+</script>
+</head>
+<body topmargin='0'  leftmargin='0' marginwidth='0' marginheight='0'  bgcolor=white >
+			<div align=center>
+<br />
+			<table border=0 cellspacing=0 cellpadding=0 width=90% height=1 style="table-layout:fixed;"><col width=100%></col><tr><td><img src=images/t.gif border=0 width=98% height=1 name=zb_get_table_width><br><img src=images/t.gif border=0 name=zb_target_resize width=1 height=1></td></tr></table>
+			<!-- Uks board v1070 (http://uks.vv.st) -->
+<!-- 스킨수정 자유롭고 배포도 자유롭게하세요!! -->
+
+<div id="member_emb" style="border-width:0px; border-style:none; width:0px; height:0px; position:absolute; left:0px; top:0px; z-index:1;"></div> 
+<script language="javascript">
+<!--
+        function msgposit_emb(){ 
+        member_emb.style.posLeft = event.x - 25 + document.body.scrollLeft
+        member_emb.style.posTop = event.y - 110 + document.body.scrollTop 
+        } 
+
+        function msgset_emb(str){ 
+        var text 
+        text ='<table align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="" style="font-size:9pt; border-width:0; border-color:black; border-style:solid; word-break:break-all;">'
+        text += '<tr ><td align=center>'+str+'</td></tr></table>'
+        member_emb.innerHTML=text 
+        } 
+
+        function msghide_emb(){ 
+        member_emb.innerHTML='' 
+        } 
+-->
+</script>
+<script language="javascript">
+<!-- 
+document.write('<style type="text/css"> .opacity1 {filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=75) ;border-color:AEAEAE;} .opacity0 {filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=45) progid:DXImageTransform.Microsoft.Shadow(color=#00344C,Direction=135,Strength=3) ;border-color:black;}</style>'); 
+-->
+</script>
+<table border=0 cellspacing=0 cellpadding=0 width=90%>
+<tr>
+	<td align=right>
+		<a onfocus=blur() href='login.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&s_url=%2Fbbs%2Fzboard.php%3Fid%3Dbooking%26page%3D43%26page_num%3D20%26category%3D%26sn%3Doff%26ss%3Don%26sc%3Don%26keyword%3D%26prev_no%3D1119%26sn1%3D%26divpage%3D1%26select_arrange%3Dheadnum%26desc%3Dasc&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>로그인</a>
+		<a onfocus=blur() href=# onclick="window.open('member_join.php?group_no=1','zbMemberJoin','width=560,height=590,toolbars=no,resizable=yes,scrollbars=yes')">회원가입</a>
+		<Zeroboard 정보수정</a>
+		<Zeroboard 메모박스</a>
+		<Zeroboard 로그아웃</a>
+
+	</td>
+</tr>
+</table>
+<table style="border-width:1;border-color:CCCCCC;border-style:solid;padding:5;table-layout:fixed" cellspacing=0 cellpadding=0 width=90%>
+<form method=post name=list action=list_all.php><input type="hidden" name="PHPSESSID" value="82800cecd38cbbdcb6e5b6b7f7a113c6" />
+<input type=hidden name=page value=43>
+<input type=hidden name=id value=booking>
+<input type=hidden name=select_arrange value=headnum>
+<input type=hidden name=desc value=asc>
+<input type=hidden name=page_num value=20>
+<input type=hidden name=selected>
+<input type=hidden name=exec>
+<input type=hidden name=keyword value="">
+<input type=hidden name=sn value="off">
+<input type=hidden name=ss value="on">
+<input type=hidden name=sc value="on">
+<col width=50></col><!--<col width=100></col>--><col width=></col>
+<col width=100></col><col width=70></col><col width=40></col><col width=40></col><tr align=center>
+	<td class=title_han height=30><img src=skin/uks_board_v1070/h_no.gif border=0></td>	<!--<td class=title_han nowrap><img src=skin/uks_board_v1070/h_select.gif border=0></td>-->	<td class=title_han><img src=skin/uks_board_v1070/h_subject.gif border=0></td>
+	<td class=title_han><img src=skin/uks_board_v1070/h_write.gif border=0></td>	<td class=title_han><img src=skin/uks_board_v1070/h_date.gif border=0></td>	<td class=title_han><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=vote&desc=desc&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'><img src=skin/uks_board_v1070/h_vote.gif border=0></a></td>	<td class=title_han><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=hit&desc=desc&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'><img src=skin/uks_board_v1070/h_hit.gif border=0></a></td></tr>
+</table>
+<table border=0 style="padding:5;table-layout:fixed" cellspacing=0 cellpadding=4 width=90%>
+<col width=50></col><!--<col width=100></col>--><col width=></col>
+<col width=100></col><col width=70></col><col width=40></col><col width=40></col>
+<tr align=center class=list0>
+		<td class=uks_2>871</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1262">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1262&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer1','visible')" style=cursor:hand><font class=list_han>전수아</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.23</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>815</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>870</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1259">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1259&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer2','visible')" style=cursor:hand><font class=list_han>오채원</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.22</td>		<td nowrap class=uks_2>5</td>		<td nowrap class=uks_2>532</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>869</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1256">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1256&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer3','visible')" style=cursor:hand><font class=list_han>서민아</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.21</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>3</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>868</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1254">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1254&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer4','visible')" style=cursor:hand><font class=list_han>정진주</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.21</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>412</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>867</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1253">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1253&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[2]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer5','visible')" style=cursor:hand><font class=list_han>한성모</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.21</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>3</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>866</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1248">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1248&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약 부탁드립니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[2]</font> &nbsp;</td> 
+		<td class=uks_1><nobr><b>&nbsp;<span onMousedown="ZB_layerAction('zbLayer6','visible')" style=cursor:hand><font class=list_han>안규선</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.19</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>776</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>865</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1246">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1246&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예악부탁드립니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer7','visible')" style=cursor:hand><font class=list_han>김진철</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.19</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>386</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>864</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1244">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1244&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer8','visible')" style=cursor:hand><font class=list_han>엄민영</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.18</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>3</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>863</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1243">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1243&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[2]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer9','visible')" style=cursor:hand><font class=list_han>전수아</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.18</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>8</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>862</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1242">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1242&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer10','visible')" style=cursor:hand><font class=list_han>김빛나라</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.17</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>3</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>861</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1241">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1241&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer11','visible')" style=cursor:hand><font class=list_han>김희정</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.17</td>		<td nowrap class=uks_2>3</td>		<td nowrap class=uks_2>725</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>860</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1235">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1235&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>11월 22일 예약</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer12','visible')" style=cursor:hand><font class=list_han>김강인</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.16</td>		<td nowrap class=uks_2>4</td>		<td nowrap class=uks_2>755</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>859</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1233">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1233&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>11월17일예약이요~!</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer13','visible')" style=cursor:hand><font class=list_han>주소현</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.16</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>507</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>858</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1231">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1231&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>토요일 예약</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr><b>&nbsp;<span onMousedown="ZB_layerAction('zbLayer14','visible')" style=cursor:hand><font class=list_han>송지영</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.16</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>2</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>857</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1223">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1223&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>this coming Sunday...</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[324]</font> &nbsp;</td> 
+		<td class=uks_1><nobr><b>&nbsp;<span onMousedown="ZB_layerAction('zbLayer15','visible')" style=cursor:hand><font class=list_han>Jo Andre Kristiansen</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.14</td>		<td nowrap class=uks_2>6</td>		<td nowrap class=uks_2>822</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>856</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1217">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1217&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>15일 예약합니다</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr><b>&nbsp;<span onMousedown="ZB_layerAction('zbLayer16','visible')" style=cursor:hand><font class=list_han>남영민</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.13</td>		<td nowrap class=uks_2>3</td>		<td nowrap class=uks_2>564</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>855</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1216">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1216&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer17','visible')" style=cursor:hand><font class=list_han>이호성</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.13</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>494</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>854</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1215">-->&nbsp;<img src=skin/uks_board_v1070/old_head.gif border=0 align=absmiddle>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1215&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>15일 pm3~5시 예약신청합니다.</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr><b>&nbsp;<span onMousedown="ZB_layerAction('zbLayer18','visible')" style=cursor:hand><font class=list_han>김미정</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.13</td>		<td nowrap class=uks_2>2</td>		<td nowrap class=uks_2>558</td></tr>
+
+
+<tr align=center class=list0>
+		<td class=uks_2>853</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1211">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1211&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약변경요+_+</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer19','visible')" style=cursor:hand><font class=list_han>송지영</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.12</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>1</td></tr>
+
+
+<tr align=center class=list1>
+		<td class=uks_2>852</td>	<!--<td nowrap class=uks_2><nobr>&nbsp;<nobr></td>-->	<td align=left nowrap class=uks_2><!--<input type=checkbox name=cart value="1210">-->&nbsp;<img src=skin/uks_board_v1070/secret_head.gif border=0 align=absmiddle alt='비밀글입니다'>&nbsp; <a href="view.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=1210&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6"  ><font class=list_han>예약^^</a><font class=list_han> &nbsp;<font face="굴림" style=font-size:8pt>[1]</font> &nbsp;</td> 
+		<td class=uks_1><nobr>&nbsp;<span onMousedown="ZB_layerAction('zbLayer20','visible')" style=cursor:hand><font class=list_han>김선화</span><font class=list_han></nobr></td>		<td nowrap class=uks_2>09.11.12</td>		<td nowrap class=uks_2>0</td>		<td nowrap class=uks_2>6</td></tr>
+
+</table>
+<img src=skin/uks_board_v1070/t.gif border=0 height=10><br>
+<table border=0 cellpadding=0 cellspacing=0 width=90%>
+<tr valign=top>
+	<td>
+		<a onfocus=blur() href='/bbs/zboard.php?id=booking&page=43&category=&sn=off&ss=on&sc=on&keyword=&prev_no=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'><font class=uks_eng><img src=skin/uks_board_v1070/k_list.gif border=0>&nbsp;</a>
+		<Zeroboard <img src=skin/uks_board_v1070/k_arrange.gif border=0>&nbsp;</a>
+		<Zeroboard <img src=skin/uks_board_v1070/k_setup.gif border=0>&nbsp;</a>
+		<a onfocus=blur() href='write.php?id=booking&page=43&sn1=&divpage=1&sn=off&ss=on&sc=on&select_arrange=headnum&desc=asc&no=&mode=write&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'><font class=uks_eng><img src=skin/uks_board_v1070/k_write.gif border=0></a>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+		<table cellspacing=0 cellpadding=0 border=0><tr align=center> <td style='padding:3 8 0 8' nowrap><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=40&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'><img src='skin/uks_board_v1070/k_arrow1.gif' border=0 vspace=2> 이전</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=41&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>41</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=42&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>42</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><font color=ff6600><b>43</b></font></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=44&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>44</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=45&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>45</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=46&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>46</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=47&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>47</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=48&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>48</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=49&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>49</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' onmouseover=this.style.background='#F7F7F7' onmouseout=this.style.background=''><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=50&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>50</a></td><td width=1 bgcolor=#CCCCCC nowrap></td><td style='padding:3 8 0 8' nowrap><a onfocus=blur() href='/bbs/zboard.php?id=booking&page=51&select_arrange=headnum&desc=asc&category=&sn=off&ss=on&sc=on&keyword=&sn1=&divpage=1&PHPSESSID=82800cecd38cbbdcb6e5b6b7f7a113c6'>다음 <img src='skin/uks_board_v1070/k_arrow2.gif' border=0 vspace=2></a></td> </tr></table>	</td>
+</tr>
+<tr>
+	<td align=right>
+		<table border=0 cellspacing=0 cellpadding=0>
+		</form>
+		<form method=get name=search action=/bbs/zboard.php><input type="hidden" name="PHPSESSID" value="82800cecd38cbbdcb6e5b6b7f7a113c6" /><input type=hidden name=id value=booking><input type=hidden name=select_arrange value=headnum><input type=hidden name=desc value=asc><input type=hidden name=page_num value=20><input type=hidden name=selected><input type=hidden name=exec><input type=hidden name=sn value="off"><input type=hidden name=ss value="on"><input type=hidden name=sc value="off"><input type=hidden name=category value="">
+		<tr>
+			<td>
+				<a href="javascript:OnOff('sn')" onfocus=blur()><img src=skin/uks_board_v1070/name_off.gif border=0 name=sn></a>&nbsp;
+				<a href="javascript:OnOff('ss')" onfocus=blur()><img src=skin/uks_board_v1070/subject_on.gif border=0 name=ss></a>&nbsp;&nbsp;
+				<a href="javascript:OnOff('sc')" onfocus=blur()><img src=skin/uks_board_v1070/content_on.gif border=0 name=sc></a>&nbsp;&nbsp;
+			</td>
+			<td><input type=text name=keyword value="" class=input size=10></td>
+			<td><input type=submit class=uks_submit value="검색"></td>
+			<td><input type=button class=uks_button value="취소" onclick=location.href="zboard.php?id=booking"></td>
+		</tr>
+		</form>
+		</table>
+	</td>
+</tr>
+</table>
+<br>
+
+<script>
+print_ZBlayer('zbLayer1', '', '', '', 'booking', '%C0%FC%BC%F6%BE%C6', '', '', '', '');
+print_ZBlayer('zbLayer2', '', 'cnVjYTIxMUBuYXZlci5jb20=', '', 'booking', '%BF%C0%C3%A4%BF%F8', '', '', '', '');
+print_ZBlayer('zbLayer3', '', '', '', 'booking', '%BC%AD%B9%CE%BE%C6', '', '', '', '');
+print_ZBlayer('zbLayer4', '', '', '', 'booking', '%C1%A4%C1%F8%C1%D6', '', '', '', '');
+print_ZBlayer('zbLayer5', '', 'aGFuc20wMDAwQG5hdmVyLmNvbQ==', '', 'booking', '%C7%D1%BC%BA%B8%F0', '', '', '', '');
+print_ZBlayer('zbLayer6', '', 'aXNzYXZpZWlAbmF2ZXIuY29t', '214', 'booking', '%BE%C8%B1%D4%BC%B1', '', '', '', '');
+print_ZBlayer('zbLayer7', 'http://cafe.naver.com%2Fd700nikon', 'Y2x1YmRydWdAaGFubWFpbC5uZXQ=', '', 'booking', '%B1%E8%C1%F8%C3%B6', '', '', '', '');
+print_ZBlayer('zbLayer8', '', '', '', 'booking', '%BE%F6%B9%CE%BF%B5', '', '', '', '');
+print_ZBlayer('zbLayer9', '', '', '', 'booking', '%C0%FC%BC%F6%BE%C6', '', '', '', '');
+print_ZBlayer('zbLayer10', '', '', '', 'booking', '%B1%E8%BA%FB%B3%AA%B6%F3', '', '', '', '');
+print_ZBlayer('zbLayer11', '', '', '', 'booking', '%B1%E8%C8%F1%C1%A4', '', '', '', '');
+print_ZBlayer('zbLayer12', '', '', '', 'booking', '%B1%E8%B0%AD%C0%CE', '', '', '', '');
+print_ZBlayer('zbLayer13', '', '', '', 'booking', '%C1%D6%BC%D2%C7%F6', '', '', '', '');
+print_ZBlayer('zbLayer14', 'http://www.pink-street.com', 'bWFzdGVyQHBpbmstc3RyZWV0Lm5ldA==', '23', 'booking', '%BC%DB%C1%F6%BF%B5', '', '', '', '');
+print_ZBlayer('zbLayer15', '', 'am9hbmRyZWtAaG90bWFpbC5jb20=', '162', 'booking', 'Jo+Andre+Kristiansen', '', '', '', '');
+print_ZBlayer('zbLayer16', '', 'bmFteW0xMkBuYXRlLmNvbQ==', '213', 'booking', '%B3%B2%BF%B5%B9%CE', '', '', '', '');
+print_ZBlayer('zbLayer17', '', 'Zm9yc2V2ZW43QGhhbm1haWwubmV0', '', 'booking', '%C0%CC%C8%A3%BC%BA', '', '', '', '');
+print_ZBlayer('zbLayer18', '', 'bWozOTEwQGhhbm1haWwubmV0', '212', 'booking', '%B1%E8%B9%CC%C1%A4', '', '', '', '');
+print_ZBlayer('zbLayer19', '', '', '', 'booking', '%BC%DB%C1%F6%BF%B5', '', '', '', '');
+print_ZBlayer('zbLayer20', '', '', '', 'booking', '%B1%E8%BC%B1%C8%AD', '', '', '', '');
+</script>
+			<!--sdo table border=0 cellpadding=0 cellspacing=0 height=20 width=90%>
+			<tr>
+				<td align=right style=font-family:tahoma,굴림;font-size:8pt;line-height:150%;letter-spacing:0px>
+					<font style=font-size:7pt>Copyright 1999-2014</font> <a href=http://www.zeroboard.com target=_blank onfocus=blur()><font style=font-family:tahoma,굴림;font-size:8pt;>Zeroboard</a> / skin by <a href=http://uks.vv.st target=_blank onfocus=blur()>Uks</a>				</td>   
+			</tr>
+			</table sdo-->
+
+			</div>
+</body>
+</html>
+			
+
+<!--
+ Session Excuted  : 0.0002
+ Connect Checked  : 0.0004
+ Query Excuted  : 0.001
+ PHP Excuted  : 0.012
+ Check Lists : 0.006
+ Skins Excuted  : 0.011
+ Total Excuted Time : 0.024
+-->

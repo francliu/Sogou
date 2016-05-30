@@ -424,7 +424,6 @@ public class ListBlockExtractor implements ContentHandler {
 				real_child_num++;
 			}
 		}
-		
 		if (first_child != null) {
 			if (first_child.height <= 60 && e.height > 200 && first_child.width*2 > e.width && first_child.text_len < 10 && first_child.text_len > 0) {
 				e.has_sub_title = true;
@@ -1328,7 +1327,6 @@ public class ListBlockExtractor implements ContentHandler {
 					if ((pos1> 0 && pos1 <= 5)|| (pos2> 0 && pos2 <= 5)) {
 						info_child_num++;
 					}
-
 				}
 			}
 			if ((info_child_num>=3 && info_child_num+2>= real_child_num)
@@ -1524,7 +1522,6 @@ public class ListBlockExtractor implements ContentHandler {
 					if (pre.is_sub_title && !pre.is_recommand_title) {
 						pre.is_text = true;
 						pre.pe.is_text = true;
-
 					}
 					System.out.println("aaaaa ");
 				}
@@ -1562,8 +1559,6 @@ public class ListBlockExtractor implements ContentHandler {
 			if (first_child != null && first_child.is_sub_title && first_child.text_len + 5 > e.text_len) {
 				e.is_sub_title = true;
 			}
-			
-
 		}
 		String[] recommend_keys = {"相关", "其他相关", "类似", "猜你喜欢", "热门", "最新", "附近的", "友情链接", "推荐"};
 		if (e.is_sub_title) {
@@ -1736,7 +1731,7 @@ public class ListBlockExtractor implements ContentHandler {
 	
 	public static void main(String[] args) throws IOException, SAXException {
 		int index = 1913;
-		FileInputStream f_stream = new FileInputStream(new File("t.html"));
+		FileInputStream f_stream = new FileInputStream(new File("519Pages\\t1026.html"));
 		byte[] bs = new byte[1024*1024*4];
 		int len = f_stream.read(bs);
 		String s = new String(bs, 0, len, "UTF-8");

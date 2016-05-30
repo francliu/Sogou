@@ -1,0 +1,834 @@
+http://new.qlzq.com.cn/news/HongKongNews.jsp?cat=ggxw&whichCat=75c946a8b242910016eca26165857532c84b8480af9517ec6467d0421b8a4657
+<base href="http://new.qlzq.com.cn/news/HongKongNews.jsp?cat=ggxw&whichCat=75c946a8b242910016eca26165857532c84b8480af9517ec6467d0421b8a4657">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>欢迎光临齐鲁证券</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="/css/news.css" rel="stylesheet" type="text/css">
+<link href="/css/column.css" rel="stylesheet" type="text/css">
+<link href="/css_new/css.css" rel="stylesheet" type="text/css"/>
+<SCRIPT type="text/javascript" src="/js/tag.js"></SCRIPT>
+<script type="text/javascript" src="/share/js/jsUtils.js"></script>
+</HEAD>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--头部-->
+<link href="/css2012/topbottom.css" rel="stylesheet" type="text/css" />
+<!-- 处理ajax返回信息的脚本 -->
+<script type="text/javascript" src="/js_new/home/loginAjax.js" ></script>
+<!-- include 的 js -->
+<script type="text/javascript" src="/js_new/ajax/ajax.js"></script>
+<script type="text/javascript" src="/js/commons.js"></script>
+<script type="text/javascript" src="/ebmall/js/csswebutf.js"></script>
+<script type="text/javascript" src="/js/common/codeSuggest.js"></script>
+<script type="text/javascript" src="/js/setTab.js"></script>
+<script type="text/javascript" src="/js/rememberPwd.js"></script>
+<script type="text/javascript" src="/js/ssoCheck.js"></script>
+<style type="text/css"> 
+	.thead { 
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; 
+    color: #4f6b72; 
+    border-right: 1px solid #b8b4b6; 
+    border-bottom: 1px solid #b8b4b6; 
+    border-top: 1px solid #b8b4b6; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-align: center; 
+    padding: 6px 6px 6px 12px; 
+    background: #d7d6d6; 
+	} 
+</style>
+<script type="text/javascript">
+function AddFavorite(sURL, sTitle)
+{
+   try
+   {
+       window.external.addFavorite(sURL, sTitle);
+   }
+   catch (e)
+   {
+       try
+       {
+           window.sidebar.addPanel(sTitle, sURL, "");
+       }
+       catch (e)
+       {
+           alert("加入收藏失败，请使用Ctrl+D进行添加");
+       }
+   }
+}
+function go(url,target_){
+
+	var host = window.location.host;
+	var big5 = host.indexOf("big5");
+	if(big5 >=0){
+		if(url.indexOf("ht"+"tps://")>=0 | url.indexOf("ht"+"tp://")>=0){
+			url = url;
+		}else{
+			url = "ht"+"tp://"+host+url;
+		}
+	}
+	if(target_==undefined||target_==null){
+		target="parent";
+	}
+	if(url&&url!="void"){
+		if(target_=="_blank")
+			window.open(url);
+		else{
+			document.location.href=url;
+		}
+	}
+}
+function goToken(url,target_){
+
+	var host = window.location.host;
+	var big5 = host.indexOf("big5");
+	if(big5 >=0){
+		if(url.indexOf("ht"+"tps://")>=0 | url.indexOf("ht"+"tp://")>=0){
+			url = url;
+		}else{
+			url = "ht"+"tp://"+host+url;
+		}
+	}
+	if(target_==undefined||target_==null){
+		target="parent";
+	}
+	if(url&&url!="void"){
+	if(GetCookie("SSO_TOKEN")){
+	     url=url+"?ryhclienttoken="+encodeURIComponent(GetCookie("SSO_TOKEN"));
+	}
+		if(target_=="_blank")
+			window.open(url);
+		else{
+			document.location.href=url;
+		}
+	}
+}
+function MM_showHideLayers() { //v9.0
+  var i,p,v,obj,args=MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) 
+  with (document) if (getElementById && ((obj=getElementById(args[i]))!=null)) { v=args[i+2];
+    if (obj.style) { 
+	    var tid = obj.id;
+	    if(obj.id!=null&&obj.id=="index-new-three-one"){
+	    	if(v=="hide"){
+	    		document.getElementById("tickzs").style.display="none";
+	    	}else if(document.getElementById("market14").style.display=="none"){
+	    		document.getElementById("tickzs").style.display="";
+	    	}
+	    }
+	    obj=obj.style; v=(v=='show')?'visible':(v=='hide')?'hidden':v; }
+	    obj.visibility=v; 
+    }
+}
+function outSearch(){
+	document.getElementById("popup").style.display="none";
+	return false;
+}
+function OnExit(field) {
+		if (field.value == "")
+
+		{ field.value = field.defaultValue; }
+	}    
+	
+	function showMenua(menuID,tagId,index) {
+		if(document.getElementById(menuID)){
+			document.getElementById(menuID).className=(index==0?"link":"Tcurr");
+		}
+		if(document.getElementById(tagId)){
+			document.getElementById(tagId).style.display=(index==0?"none":"block");
+		}
+	}
+function productApply(addr){
+   if(addr){
+       if(addr.indexOf("token=") > -1){
+           addr+=encodeURIComponent(GetCookie("SSO_TOKEN"));
+           go(addr,"_blank");
+           //alert(addr);
+       }
+   }else{
+       alert("融易汇专属功能，请进入融易汇使用！");
+   }
+}
+function loginRelocation(){
+	window.location.href="/login/login.jsp?forward="+window.location.href;
+}
+function logout(){
+	var url = "/user.do?method=logoutForAjax";
+		SetCookie('SSO_TOKEN',null,new Date(0));
+		SetCookie('SSO_TOKEN_UID',null,new Date(0));
+		createResponse(url);
+}
+</script>
+
+<script type="text/javascript">
+//ssoAutoLoginCom();
+</script>
+
+ <script type="text/javascript">
+//addUser();
+</script>
+ 
+  
+<div id="top2011" >
+    <div class="hillBg">
+    		<span class="userInfo" id="uiSpanV"></span>
+			<ul class="tFun1">
+	    		<li><a href="/rydy/rydy.jsp" target="_blank">融易引导</a></li>
+	    		<li><a href="#" onclick="AddFavorite('http://www.easysino.com','齐鲁证券')">加入收藏</a></li>
+	    		<li><a href="javascript:go('ht'+'tp://big5.easysino.com','_blank');">繁体版</a></li>
+	    		<li><a href="javascript:go('ht'+'tp://www.easysino.com/english/index.html','_blank');">ENGLISH</a></li>
+	    	</ul>
+            <h2><a href="/index.html" title="齐鲁证券融易网">齐鲁证券融易网</a></h2>
+            <a href="http://www.95538.cn"><span style="position: absolute;top:70px;left:300px; background: url('/pic2014/new_95538.jpg');width:65px;height: 17px; "></span></a>
+            <div class="tFun2">
+            <ul>
+	    		<li><a href="/information/StockList.jsp" target="_blank">股票</a></li>	    		
+	    		<li><a href="/aboutUs/simpleNotify.jsp?whichCat=63c8822b70a40c3f1c9773e03dd3ba809f183527e34b9cc9b8d8647c00d66f56" target="_blank">IPO专区</a></li>
+	    		<li><a href="/information/FuturesNews.jsp" target="_blank">期货</a></li>
+	    		<li><a href="/hall/sopSchool.jsp?pId=a3&sId=a38" target="_blank">个股期权</a></li>
+                <li><a href="/finance/otc/productList.jsp" target="_blank">柜台市场</a></li>
+	    		<li style="margin-right:0;width: 60px;"><a href="/rzrq/index.jsp"  target="_blank">融资融券</a></li>
+	    	</ul>
+            </div>     
+           <div class="navBox">
+           		<ul class="nav">
+           			
+		           			<li id="mainNav1"><span class="iTit"><a href="/index.html" class="">首页</a></span></li>
+		           			
+				           		  <li onMouseOver="showMenua('m1','a1',1)" onMouseOut="showMenua('m1','a1',0)"><span class="iTit"><i id="m1"><a href="javascript:go('/hall_new/index.html','_blank');" class="">网上营业厅</a></i></span>
+		           			       
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m2','a2',2)" onMouseOut="showMenua('m2','a2',0)"><span class="iTit"><i id="m2"><a href="javascript:go('/news_new/index.html','_blank');" class="Tcurr">资讯中心</a></i></span>
+		           			       
+		           			      	<div class="subNav" id="a2"  style="z-index: 1002">
+				                        	 <div>
+					                        	 <ul style="z-index: 1002;">
+					                        	 
+					                           
+					                              <li><a href="javascript:go('/news/NewsIndex.html','_parent');"><b>新闻</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/StockList.html','_parent');"><b>股票</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/news_new/fund.html','_parent');"><b>基金</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/WarrantNews.html','_parent');"><b>权证</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/BoardNews.html','_parent');"><b>中小板</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/threeBoardNews.html','_parent');"><b>股转系统</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/BondNews.html','_parent');"><b>债券</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/HongKongNews.html','_parent');"><b>港股</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/FuturesNews.html','_parent');"><b>期货</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/information/ExchangeNews.html','_parent');"><b>外汇</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/news/hgt/news.jsp','_parent');"><b>沪港通</b></a></li>
+					                              
+					                             </ul>
+				                             </div>
+				                        </div>	
+				                        
+				                        
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m3','a3',3)" onMouseOut="showMenua('m3','a3',0)"><span class="iTit"><i id="m3"><a href="javascript:go('/ebmall/index.jsp','_blank');" class="">易币商城</a></i></span>
+		           			       
+		           			      	<div class="subNav" id="a3"  style="z-index: 1002">
+				                        	 <div>
+					                        	 <ul style="z-index: 1002;">
+					                        	 
+					                           
+					                              <li><a href="javascript:go('/ebmall/mallInfo.jsp','_parent');"><b>易币介绍</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/ebmall/productList.jsp','_parent');"><b>产品中心</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/ebmall/search.jsp','_parent');"><b>易币查询</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/ebmall/feedback.jsp','_parent');"><b>用户留言</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/ebmall/problem.jsp','_parent');"><b>常见问题</b></a></li>
+					                              
+					                             </ul>
+				                             </div>
+				                        </div>	
+				                        
+				                        
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m4','a4',4)" onMouseOut="showMenua('m4','a4',0)"><span class="iTit"><i id="m4"><a href="javascript:go('/news_new/fund.jsp','_blank');" class="">金融超市</a></i></span>
+		           			       
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m5','a5',5)" onMouseOut="showMenua('m5','a5',0)"><span class="iTit"><i id="m5"><a href="javascript:go('/finance_new/index.html','_blank');" class="">齐鲁理财</a></i></span>
+		           			       
+		           			      	<div class="subNav" id="a5"  style="z-index: 1002">
+				                        	 <div>
+					                        	 <ul style="z-index: 1002;">
+					                        	 
+					                           
+					                              <li><a href="javascript:go('/finance/cftsMain.jsp','_parent');"><b>财富泰山</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/finance/WealthManagement.jsp','_parent');"><b>资产管理</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/finance/otc/productList.jsp','_parent');"><b>柜台市场</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/rzrq/index.jsp','_parent');"><b>融资融券</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/future/index.jsp','_parent');"><b>期货IB</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/oldnews/qlycCmsList.jsp?whichCat=yjs_qlcb','_parent');"><b>齐鲁研究</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/quote/index.jsp','_parent');"><b>报价回购</b></a></li>
+					                              
+					                             </ul>
+				                             </div>
+				                        </div>	
+				                        
+				                        
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m6','a6',6)" onMouseOut="showMenua('m6','a6',0)"><span class="iTit"><i id="m6"><a href="javascript:go('/hall/SchoolIndex.jsp?pId=a3','_blank');" class="">投资者教育</a></i></span>
+		           			       
+		           			      </li>
+           			    
+				           		  <li onMouseOver="showMenua('m7','a7',7)" onMouseOut="showMenua('m7','a7',0)"><span class="iTit"><i id="m7"><a href="javascript:go('/about/index.html','_blank');" class="">走进齐鲁</a></i></span>
+		           			       
+		           			      	<div class="subNav" id="a7"  style="z-index: 1002">
+				                        	 <div>
+					                        	 <ul style="z-index: 1002;">
+					                        	 
+					                           
+					                              <li><a href="javascript:go('/about/indexForward.jsp','_parent');"><b>关于齐鲁</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/History.jsp','_parent');"><b>发展历程</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/news.jsp?whichCat=d8ba7c38daac6b06268adc1999cc678f1beef791e104f5f6&showSize=10','_parent');"><b>齐鲁动态</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/ResOperations.jsp','_parent');"><b>经营业绩</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/Honor.jsp','_parent');"><b>公司荣誉</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/Publications.jsp','_parent');"><b>公司刊物</b></a></li>
+					                              
+					                           
+					                              <li><a href="javascript:go('/about/ContactUs.jsp','_parent');"><b>联系我们</b></a></li>
+					                              
+					                             </ul>
+				                             </div>
+				                        </div>	
+				                        
+				                        
+		           			      </li>
+           			    
+           		</ul>
+           <div class="Gsearch">
+                	<form name="frm" id="frm" method="post" action="/f10.do?method=checkBondAndFundAndStockNew"> </form>
+                		<input name="searchgpdm" id="searchgpdm"  type="text"  onclick="OnEnter(this)" onblur="outSearch()" value="请输入代码" />
+                        <div class="selBox">
+                    	<div id="topBor" class="topSel">
+						<input id="topSel" type="text" name="tex1">
+						<dl>
+						<dt class="">股票</dt>
+						<dd class="noshow">
+						<ul>
+						   <li id="gp" value="1">股票</li>
+						   <li id="zx" class="" value="2">资讯</li>
+						</ul>
+						</dd>
+						</dl>
+						</div>
+                        <script>
+							Effect.SelectList("topBor","topSel",0);
+						</script>
+                    </div>
+                        <a href="javascript:submitCode();" target="_parent"><img src="/pic/ebmall/common/top/dotSear.gif" /></a>
+                        <div style="position:absolute;width:260px;z-index:99;text-align: right; display: none;" id="popup" class="dataBox"  autocomplete="off" type="text" size="30" maxlength="6">	
+						<table id="complete_tablea" bgcolor="#FFFAFA" border="0" cellspacing="0" cellpadding="0" style="width:100%;border-left:1px solid #C1DAD7;border-top:1px solid #C1DAD7;border-bottom:1px solid #C1DAD7;border-right:1px solid #C1DAD7" />
+							<tbody id="complete_bodya"> </tbody>
+						</table>
+					</div>
+                </div>
+           </div>
+  </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+	var stock = new StockSuggest();
+	stock.registById('searchgpdm');
+	stock.registForm('frm');     
+	function OnEnter(field) {
+		if (field.value == field.defaultValue)
+		{
+			 field.value = "";
+		 }
+	}
+	function submitCode(){
+	 var flag=document.getElementById("topSel").value;
+	   var title=document.getElementById("searchgpdm").value;
+	    if(flag=="2"){
+	    if(title==null||title==""||title=="请输入代码"){
+	    alert("请输入资讯关键字");
+	    return;
+	   }
+	   document.getElementById("frm").action="/news/QueryNewsList.jsp?title="+title;
+	   document.getElementById("frm").submit();
+	   }
+	   else if(flag=="1"){
+		    if(title==null||title==""){
+				alert("请正确输入股票代码");
+				return;
+			}
+			stock.submit();
+	   }
+	   else{
+	    if(title==null||title==""||title=="请输入代码"){
+				alert("请正确输入股票代码");
+				return;
+			}
+			stock.submit();
+	   }
+	}
+	jQuery.ajax({
+		url: '/user.do?method=isLogin',
+	    type: 'POST',
+	    async: false,
+	    dataType: 'json',
+	    error: function(data){
+	    	//MallMsgBox.alert('提示', data.msg);
+	    	//alert("cuowu top.jsp");
+	    },
+	    success: function(data){
+	        if(data.isLongin == '1'){
+	          //  document.getElementById("uiSpanV").innerHTML = "<a onclick=\"goToken('https://reg.95538.cn/userreg/UserProfile.aspx','_blank')\" href=\"javascript:void(0)\" class=\"czs\">"+data.realName+"</a>，欢迎您&nbsp;&nbsp;<a href=\"javascript:void(0)\" class=\"arrowlink\"  onclick=\"javascript:logout();\">安全退出</a>";
+	            //addUser();
+	        }else{
+	           //document.getElementById("uiSpanV").innerHTML = "您好，游客！请 <a href=\"/login/login.jsp\" class=\"czs\">登录</a>";
+	        }
+	    }
+	});
+	function lo(){
+	    location.href = "/index.jsp";
+	}
+	function logoutTopJsp(){
+	var $cc = jQuery.noConflict();
+	var iframe = $cc("<iframe onload='lo()'></iframe>");
+		var url = "https://reg.95538.cn/userreg/ajaxhandler.ashx?method=exit";
+	    iframe.attr('src',url);
+	    iframe.appendTo($cc("body"));
+	}
+</script>
+<!--头部结束-->
+<!--头部结束-->
+<!--灰色和白色外框-->
+<div class="main2011">
+	<div class="w9802011" >
+<!--原网站内容部分-->
+
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="news_view_left_tab">
+     <link href="/css_new/treecenter.css" rel="stylesheet" type="text/css" />
+ 
+
+
+
+
+
+ 
+
+
+
+
+						
+																																																																																				
+	<div class="news_view_div3">
+    <div><a href="/news/HongKongNews.jsp?cat=ggxw&whichCat=75c946a8b2429100da78181fc2e89b309f183527e34b9cc9a2f3360c295beb7b"  class="news_view_nav" ><font color="#FFFFFF">港股新闻</font></a></div>
+
+    
+    
+    <div><a href="/news/HongKongNews.jsp?cat=ggsc&whichCat=75c946a8b2429100cf8ed7663140707f9f183527e34b9cc9a2f3360c295beb7b" class="news_view_nav2">港股市场</a></div>
+
+    
+    <div><a href="/news/HongKongNews.jsp?cat=ggpl&whichCat=75c946a8b242910096614a9f2a3bcf9b9f183527e34b9cc9204d61c3da4ae25a" class="news_view_nav2">港股评论</a></div>
+
+    
+	<div><a href="/news/HongKongNews.jsp?cat=ggyj&whichCat=75c946a8b24291001460f2eda03372d49f183527e34b9cc9204d61c3da4ae25a" class="news_view_nav2">港股研究</a></div>
+
+    
+	<div><a href="/news/HongKongNews.jsp?cat=zzgyj&whichCat=75c946a8b2429100ac8542998ef637f5c002fb8e9d38a5fdfb1d83deab56a6f9" class="news_view_nav2">中资股研究</a></div>
+
+    
+	<div><a href="/news/HongKongNews.jsp?cat=ahgbjb&whichCat=75c946a8b242910044b1b21f9821e8b308b78a56db94e27bc1a11aad73522d53" class="news_view_nav2">AH股比价表</a></div>
+
+    
+    <div class="center"></div>
+    <div class="center"><img src="/pic/news/news_view_nav_bot2.jpg"/></div>
+    </div>
+      
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>欢迎光临齐鲁证券</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<SCRIPT type="text/javascript" src="/js/tag.js"></SCRIPT>
+<script type="text/javascript">
+<!--
+function check(){
+ //if(document.query.catNameStr.value==''){
+ //	alert("请选择栏目！");
+ //	return false;
+ //}
+ document.query.submit();
+}
+
+function checkIfOpen(){
+	if(window.opener){
+		document.query.target='';
+	}else{
+		document.query.target='_blank';
+	}
+	
+}
+//-->
+</script>
+<style>
+.centerCc {padding:0px 0px 0px 10px;}
+</style>
+</HEAD>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+<body onload="checkIfOpen();">
+<form name="query" action="/news/QueryNewsList.jsp" method=post target="_blank">
+<table cellspacing="0" cellpadding="0" class="ma_T15" >
+  <tr>
+    <td><img src="/pic/column/search_news.jpg" /></td>
+  </tr>
+  <tr>
+    <td class="search_bg2 centerCc"><table width="80%" border="0" cellspacing="0" cellpadding="0" class="left">
+      <tr>
+        <td width="45%" height="25">起始时间：</td>
+        <td width="55%">
+        <input type="text" id="StartDate" name="StartDate" value="" readonly="readonly" onfocus="WdatePicker()" class="input" size="9"/><img src="/pic/column/date.gif"  align="absmiddle" onclick="new WdatePicker(document.getElementById('StartDate'))"/>
+        
+        
+        </td>
+      </tr>
+      <tr>
+        <td height="25"> 结束时间：</td>
+        <td>
+        <input type="text" id="EndDate" name="EndDate" value="" readonly="readonly" onfocus="WdatePicker()" class="input" size="9"/><img src="/pic/column/date.gif"  align="absmiddle" onclick="new WdatePicker(document.getElementById('EndDate'))"/>
+					  
+              
+              </td>
+      </tr>
+     
+      <tr>
+        <td height="25">来　　源：</td>
+        <td><input name="source" value="" type="text" size="12" class="input" /></td>
+      </tr>
+      <tr>
+        <td height="25">标　　题：</td>
+        <td><input name="title" value="" type="text" size="12" class="input" /></td>
+      </tr>
+    </table>
+        <div class="news_view_mar"> 
+        <img src="/pic/column/search.jpg" style="cursor: hand" onmouseover="this.src='/pic/column/search_s.jpg'" onmouseout="this.src='/pic/column/search.jpg'" onclick="check();"  class="ma_T5" />
+        </div></td>
+  </tr>
+  <tr>
+    <td><img src="/pic/column/search_bottom.jpg" /></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>
+    </td>
+      
+    <td class="news_view_right_tab">
+    
+     <div class="news_view_rig_tab"><div class="news_fund_top_tab">港股新闻</div></div>
+    
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+      <link type='text/css' rel='stylesheet' href='/plugins/paging/skins/default/styles/paging.css'/>
+
+<script language="javascript" src='/plugins/paging/script/general.js'></script>
+<script language="javascript" src='/plugins/paging/script/paging.js'></script>
+
+		
+		
+        
+		    <table border="0" cellspacing="0" cellpadding="0" class="news_view_rig_news">
+		      <tr>
+		        <td colspan="2"><img src="/pic/news/news_view_top.jpg"/></td>
+		        </tr>
+		      <tr>
+		        <td rowspan="5" class="news_view_img"><img src="/pic/news/news_view_img2.jpg"/></td>
+		        <td class="news_view_font">艺人发起上市公司回报多不理想 周星驰是典型</td>
+		      </tr>
+		      <tr>
+		        <td class="news_view_time">时间：2014/10/30 08:20      来源：新浪财经 </td>
+		      </tr>
+		      <tr>
+		        <td class="center"><img src="/pic/news/news_view_thread.jpg"/></td>
+		      </tr>
+		      <tr>
+		        <td class="news_view_font_content"> <p>
+		        	    新浪财经讯 10月30日消息，据明报财经报道，影视娱乐艺人的名气大，很多都会接着声势创业兼大搞生意，藉此多开一条财路，甚至有个别例子进军成为上市公司老板。不过若投资在港上市而由艺人发起的上市公司，能够取得理想回报的少之又少。即如"星爷"周星驰打骰的比高(8220)，股价亦只能载浮载沉。
+　　谭咏麟陈百祥等 搞...
+		       </p></td>
+		      </tr>
+		      <tr>
+		        <td class="news_view_buy"><input type="button" name="Submit223" value=" 查看详情 " class="button-buy2" onclick="window.open('/news/NewsContent.jsp?docPara=a061ae6e6a2c9ef975c946a8b2429100abd2b9f15a92c96b','')"/></td>
+		      </tr>
+		    </table>   
+      
+	
+	
+	  
+   
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+         	
+        <td class="news_stock_rig_tab top">
+        	  <iframe width="100%"  src="/news/index_mode.jsp?whichCat=75c946a8b242910016eca26165857532c84b8480af9517ec6467d0421b8a4657&showSize=15&docId=a061ae6e6a2c9ef975c946a8b2429100abd2b9f15a92c96b" frameborder="0" scrolling="no"" marginheight="0" marginwidth="0" id="fundNews" name="fundNews" onload="frameFitSelfHeight('fundNews')"></iframe>
+       </td>
+        <td class="news_stock_rig_tab2 top">
+            
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="/pic/news/news_stock_rig_tit2.jpg"/></td>
+          </tr>
+        </table>
+          <table border="0" cellspacing="0" cellpadding="0" class="news_stock_news_tab">
+            <tr>
+              <td class="news_stock_top_font">公司名称</td>
+              <td class="news_stock_top_font">A股价</td>
+              <td class="news_stock_top_font">H股价</td>
+              <td class="news_stock_top_font">比价</td>
+            </tr>
+            
+            
+         
+         
+           
+          </table>
+          
+         </td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+
+
+
+
+
+<script type="text/javascript" src="/js/utils.js" ></script>
+<script type="text/javascript">
+ 
+<!--
+String.prototype.replaceAll=function(s1,s2){    
+  return this.replace(new RegExp(s1,"g"),s2);    
+} 
+ function openYbs(){
+ 	var v_code=GetCookie('SSO_TOKEN');
+ 	if(v_code!=null&&!v_code==''){
+ 	v_code=encodeURIComponent(GetCookie("SSO_TOKEN"));
+ 	MM_openBrWindow('ht'+'tp://hd.95538.cn/ybs/?ryhclienttoken='+v_code,'易博士','width=954,height=562');
+ 	}else{
+ 		window.location.href='/login/login.jsp';
+ 	}
+ }
+//-->
+</script>
+<!--原网站内容部分结束-->
+</div>
+	</div>
+<!--灰色和白色外框结束-->
+<!--底部-->
+<div id="bottom2011">
+	<!--新手上路模块-->
+	<div class="botBox1">
+    	<dl class="xssl fl">
+        	<dt><span class="red">>> </span><a href="/servicecenter/CallCenter.jsp" target="_blank">客服中心</a></dt>
+            <dd><a href="/servicecenter/CallCenter.jsp" class="img95538" style="text-decoration:none"  target="_blank">&nbsp;<i>95538</i></a><span>|</span><a href="javascript:void(0)" onclick="javascript:openYbs();">易博士</a><span>|</span><a href="/servicecenter/helpcenter.jsp" target="_blank">帮助中心</a><span>|</span><a href="/servicecenter/ComplaintsAdvice.jsp" target="_blank">投诉建议</a></dd>
+        </dl>
+        
+      <dl class="xssl fl mL60">
+       	  <dt><span class="red">>> </span>关于我们</dt>
+          <dd>
+          	<a href="/servicecenter/SecretaryNav.jsp" target="_blank">网站导航</a><span>|</span>
+            <a href="javascript:void(null)"
+				onClick='window.open("/openpage/OfficeSystem.jsp","myNewWindow2","height=485,width=605,toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, status=no")'>办公系统</a><span>|</span>
+            <a href="/share/FreeTerms.jsp" target="_blank">免责条款</a><span>|</span>
+            <a href="/hr/joinQlzq.jsp" target="_blank">诚聘英才</a><span>|</span>
+            <a href="/about/ContactUs.jsp" target="_blank">联系我们</a>
+           </dd>
+      </dl>
+
+      <dl class="xssl fl mL60">
+      		<dt><a href="#"><img src="/pic2011/common/top/botLogo.png" alt="齐鲁证券融易网" /></a></dt>
+      </dl>
+      
+    </div>
+    <div class="blank10"></div>
+    <!--新手上路模块end-->
+    
+    <!--版权信息模块-->
+<div class="botBox2">
+        <span style="font-family:Arial, Helvetica, sans-serif">Copyright © 2014 All Righits Reserved. 版权所有 齐鲁证券有限公司 鲁ICP备09057662号</span>
+        <div class="blank5"></div>
+      	<table width="400" border="0" cellspacing="0" cellpadding="0" align="center" class="m0a">
+		  <tr>
+		  	<td class="kxBox">
+		  	  <a id='___szfw_logo___' href='https://search.szfw.org/cert/l/CX20140816008722005010' target='_blank'>
+		    	<img src='https://search.szfw.org/cert.png?l=CX20140816008722005010' width="78" height="30" style="vertical-align: middle;">
+		    </a>
+			<script type='text/javascript'>(function(){document.getElementById('___szfw_logo___').oncontextmenu = function(){return false;}})();</script>
+		  	</td>
+		    <td class="kxBox" >
+		    <script src="https://kxlogo.knet.cn/seallogo.dll?sn=2010082500100001909&size=2&ct=df"></script></td>
+		    <td width="90"><a href="https://sealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=TRADE.95538.CN&lang=zh_cn" target="_blank">
+						<img src="/pic_new/ssl.gif" border="0" /></a></td>
+		    <td width="112"><a href="javascript:go('ht'+'tp://jinan.cyberpolice.cn/xuzhi1.htm','_blank')"><img src="/pic/icon.jpg" border="0" /></a></td>
+		  </tr>
+		</table>
+    </div>
+    <!--版权信息模块end-->
+</div>
+<div id="ad_float_20130801" style="position:fixed !important;position:absolute; height:206px; visibility:visible; right:30px; top:160px; z-index:2;border: 1px thin;">
+	<!--<a href="http://hd.95538.cn/spread/clickad.aspx" target="_blank"><img src="/pic2013/ad/index/QlryCode1.jpg"/></a>  -->
+	<div style="float: left;">
+		<div id="ad_c_20131022_1" style="margin-bottom: 20px;">
+			<div>
+				<img src="/ad/pic/QlryCode1.jpg"/>
+			</div>
+			<div id="ad_t_20140116_1" style="text-align: right;padding-right: 5px;background-color: white;"><a haref="javascript:void(0);" onclick="$id('ad_c_20131022_1').style.display='none';" style="cursor: pointer;">X关闭</a></div>
+		</div>
+		<div id="ad_c_20131022_2" style="margin-bottom: 20px;">
+			<div>
+				<img src="/ad/pic/QlryCode3.jpg"/>
+			</div>
+			<div id="ad_t_20140117_2" style="text-align: right;padding-right: 5px;background-color: white;"><a haref="javascript:void(0);" onclick="$id('ad_c_20131022_2').style.display='none';" style="cursor: pointer;">X关闭</a></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+<!--
+function $id(_id) {
+	return document.getElementById(_id);
+}
+/**
+window.onscroll = function() {
+	$id("ad_float_20130801").style.top  = parseInt(document.documentElement.scrollTop) + 160;
+	$id("ad_float_20130801").style.right=parseInt(document.documentElement.scrollLeft) + 10;
+}*/
+//-->
+</script>
+<!--底部结束-->
+
+
+
+
+
+
+</body>
+</html>
