@@ -12,6 +12,7 @@ public class PrintElement {
 	boolean is_text;
 	boolean in_text;
 	boolean in_list;
+	boolean is_info;
 	boolean is_footer;
 	boolean in_footer;
 	boolean is_single_block;
@@ -26,6 +27,7 @@ public class PrintElement {
 		children = new ArrayList<PrintElement>();
 		is_list = false;
 		is_text = false;
+		is_info = false;
 		in_list = false;
 		is_footer = false;
 		in_footer = false;
@@ -67,6 +69,15 @@ public class PrintElement {
 			}
 			*/
 		}
+    	else if (this.is_text&&!this.in_text) {
+    		added_border = "border:8px solid #FF34B3;";
+    		is_add_border = true;
+    	}
+    	else if (this.is_single_block&&!this.is_single_block) {
+    		added_border = "border:8px solid green;";
+    		is_add_border = true;
+    	}
+//    	else if(this.is_info)
 		if (is_add_border) {
 		//	System.out.println("hrer.");
 			cnt.cnt++;

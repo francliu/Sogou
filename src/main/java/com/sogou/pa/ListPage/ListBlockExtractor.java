@@ -1,9 +1,11 @@
 package com.sogou.pa.ListPage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -11,7 +13,9 @@ import java.io.StringReader;
 import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,9 +65,9 @@ public class ListBlockExtractor implements ContentHandler {
 	Element green;
 	Instances data_set;
 	Classifier cls;
-	
+	boolean isListPage;
 	public ListBlockExtractor() {
-
+		isListPage = false;
 		path = new LinkedList<Element>();
 		print_path = new LinkedList<PrintElement>();
 		xpath = new StringBuffer();
@@ -111,7 +115,7 @@ public class ListBlockExtractor implements ContentHandler {
 	}
 	
 	public void clear() {
-
+		isListPage = false;
 		path.clear();
 		print_path.clear();
 		xpath.setLength(0);
@@ -208,7 +212,8 @@ public class ListBlockExtractor implements ContentHandler {
 		if (green != null) {
 			green.tobottom = page.height - (green.top+green.height);
 		}
-		traverse_domtree(dom_root);
+		traverse_domtree(dom_root); 
+		isListPage();
 	}
 
 	public void startPrefixMapping(String prefix, String uri) throws SAXException {
@@ -376,6 +381,7 @@ public class ListBlockExtractor implements ContentHandler {
 
 	}
 
+	//文字节点或者不可见节点或者很小的节点
 	private boolean isIndiffentBlock(Element e) {
 		if (e.name.length() == 0) {
 			return true;
@@ -716,7 +722,7 @@ public class ListBlockExtractor implements ContentHandler {
 			e.has_merged = true;
 	//		return;
 		}
-
+		
 		if (e.child_num == 3) {
 			Element child1 = e.children.get(0);
 			if (child1.text_len < 20 && child1.height <60) {
@@ -1060,7 +1066,7 @@ public class ListBlockExtractor implements ContentHandler {
 				}
 			}
 		}
-
+		//重看一次
 		if (e.child_num < 5) {
 			int state = 0;
 			int chip_num = 0;
@@ -1099,7 +1105,7 @@ public class ListBlockExtractor implements ContentHandler {
 //				return;
 			}
 		}
-
+		
 		list_num = 0;
 		boolean has_other_block = false;
 		if (e.child_num < 5) {
@@ -1256,24 +1262,37 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 			boolean is_single_block = true;
 			Element first_child = null;
+			boolean flag = false;
+//			System.out.println("isIndiffentBlock"+e.name);
+			if(e.name.toLowerCase().equals("tbody"))flag = true;
 			for (int i = 0; i < e.child_num; i++) {
 				Element child = e.children.get(i);
 				if (isIndiffentBlock(child)) {
-					
+//					if(flag)System.out.println("isIndiffentBlock"+e.text);
 				} else {
 					if (first_child == null) {
 						first_child = child;
-						if ((first_child.area > 40000 && first_child.width < 1424) || (first_child.area > 40000 && first_child.height > 300) || first_child.text_len > 40) {
+						if ((first_child.area > 40000 && first_child.width < 1424) 
+								|| (first_child.area > 40000 && first_child.height > 300) 
+								|| first_child.text_len > 40) {
 							is_single_block = false;
+//							if(flag)System.out.println("first_child1"+e.text);
 							break;
 						}
 					} else {
-						if (first_child.name.equals(child.name) && child.height == first_child.height && child.width == first_child.width && child.text_len < 40) {
-							
-						} else if (first_child.name.equals(child.name) && child.height <= 110 && child.width <= 300 && child.text_len < 50) {
-							
+						if (first_child.name.equals(child.name) 
+								&& child.height == first_child.height 
+								&& child.width == first_child.width 
+								&& child.text_len < 40) {
+//							if(flag)System.out.println("first_child2"+e.text);
+						} else if (first_child.name.equals(child.name) 
+								&& child.height <= 110 
+								&& child.width <= 300 
+								&& child.text_len < 50) {
+//							if(flag)System.out.println("first_child3"+e.text);
 						} else {
 							is_single_block = false;
+//							if(flag)System.out.println("first_child4"+e.text);
 							break;
 						}
 					}
@@ -1282,20 +1301,23 @@ public class ListBlockExtractor implements ContentHandler {
 			e.is_single_block = is_single_block;
 			e.pe.is_single_block = is_single_block;
 			if (e.is_single_block) {
+//				if(flag)System.out.println("first_child5"+e.text);
 				return;
 			}
 			boolean has_big_child = false;
 			for (Element child: e.children) {
 				if (child.area < 20000 && child.text_len < 50) {
-					
+//					if(flag)System.out.println("first_child6"+e.text);
 				} else {
 					has_big_child = true;
+//					if(flag)System.out.println("first_child7"+e.text);
 					break;
 				}
 			}
 			if (!has_big_child) {
 				e.is_single_block = true;
 				e.pe.is_single_block = true;
+//				if(flag)System.out.println("first_child8"+e.text);
 				return;
 			}
 		}
@@ -1523,7 +1545,7 @@ public class ListBlockExtractor implements ContentHandler {
 						pre.is_text = true;
 						pre.pe.is_text = true;
 					}
-					System.out.println("aaaaa ");
+//					System.out.println("aaaaa ");
 				}
 			}
 		}
@@ -1555,7 +1577,6 @@ public class ListBlockExtractor implements ContentHandler {
 					break;
 				}
 			}
-
 			if (first_child != null && first_child.is_sub_title && first_child.text_len + 5 > e.text_len) {
 				e.is_sub_title = true;
 			}
@@ -1571,7 +1592,7 @@ public class ListBlockExtractor implements ContentHandler {
 		}		
 	}
 	
-	
+
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		if (is_abnormal_page) {
 			return;
@@ -1645,6 +1666,7 @@ public class ListBlockExtractor implements ContentHandler {
 	//		System.out.println(e.img_num + "\t" + full_xpath);
 			isSubTitle(e);
 			isList(e);
+			
 			if (e.is_list) {
 				pe.is_list = true;
 			//	list_blocks.add(e);
@@ -1665,6 +1687,7 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 			xpath.delete(xpath.lastIndexOf("/"), xpath.length());
 			full_xpath.delete(full_xpath.lastIndexOf("/"), full_xpath.length());
+
 		}
 	}
 
@@ -1676,10 +1699,9 @@ public class ListBlockExtractor implements ContentHandler {
 
 		Element element = path.peekLast();
 		
-
-		
 		String s = String.valueOf(ch, start, length);
 		PrintElement pe = new PrintElement();
+		
 		pe.text = s;
 		PrintElement p = print_path.peekLast();
 		if (p != null) {
@@ -1728,36 +1750,263 @@ public class ListBlockExtractor implements ContentHandler {
 	public void skippedEntity(String name) throws SAXException {
 		// TODO Auto-generated method stub
 	}
-	
+	public Element IsHasText(Element e)
+	{
+		int Max_area=0;
+		Element res=null;
+		for(Element c:e.children)
+		{
+			if(c.is_text){
+				if(Max_area<c.area){
+					Max_area = c.area;
+					res = c;
+				}
+			}
+			else{
+				Element d = IsHasText(c);
+				if(d!=null&&Max_area<d.area){
+					res = d;
+					Max_area = d.area;
+				}
+			}
+		}
+		return res;
+	}
+	public void isListPage(){
+		if(is_abnormal_page)
+		{
+			return;
+		}
+		if(text_blocks.size()==0)
+		{
+			isListPage = true;
+			System.out.println("list_num");
+			return;
+		}
+		long Big_Text_area=0;
+		long Big_Text_left=0;
+		long Big_Text_top=0;
+		long frist_Text_area=0;
+		long frist_Text_top=0;
+		long frist_Text_left=0;
+		long Big_List_area=0;
+		long Big_List_left=0;
+		long Big_List_top=0;
+		long frist_List_area=0;
+		long frist_List_top=0;
+		long frist_List_left=0;
+		Element Big_list = null;
+		Element Big_Text = null;
+		long list_num=0;
+		long text_num=0;
+		for(Element e:text_blocks)
+		{
+			if(e.top>page.height*2/3||e.left>700||e.area<10000)continue;
+			text_num++;
+			if(frist_Text_area==0)
+			{
+				frist_Text_area = e.area;
+				frist_Text_left = e.left;
+				frist_Text_top = e.top;
+			}
+			if(e.area>Big_Text_area)
+			{
+				Big_Text_area = e.area;
+				Big_Text_left = e.left;
+				Big_Text_top = e.top;
+				Big_list = e;
+			}
+		}
+		for(Element e:list_blocks)
+		{
+			if(e.top>page.height/2||e.left>700||e.area<5000)continue;
+			list_num++;
+			if(frist_List_area==0)
+			{
+				frist_List_area = e.area;
+				frist_List_left = e.left;
+				frist_List_top = e.top;
+			}
+			if(e.area>Big_List_area)
+			{
+				Big_List_area = e.area;
+				Big_List_left = e.left;
+				Big_List_top = e.top;
+				Big_Text = e;
+			}
+		}
+		if(Big_list!=null&&Big_Text!=null&&Big_List_area>0)
+		{
+				if(Big_List_area>Big_Text_area
+						&&(Math.abs(Big_Text.left-Big_list.left)<100&&Big_List_left<500)
+						&&((Math.abs(Big_Text.top-Big_list.top)<100
+								||Big_Text_top-Big_List_top>500)
+								&&Big_List_top<page.height/2)
+						)
+				{
+//					System.out.println("ok");
+					isListPage = true;
+					if(text_num>list_num*2)isListPage = false;
+				}
+				if(Big_List_area>Big_Text_area
+						&&list_num>=5&&text_num<=2
+						&&((Math.abs(Big_Text.top-Big_list.top)<100
+								||Big_Text_top-Big_List_top>500)
+								&&Big_List_top<page.height/2))
+				{
+					isListPage = true;
+				}
+//				if(Big_List_area>Big_Text_area
+//						&&list_num>=5&&text_num<=4
+//						&&((Math.abs(Big_Text.top-Big_list.top)<100
+//								||Big_Text_top-Big_List_top>500)
+//								&&Big_List_top<page.height/2))
+//				{
+//					isListPage = true;
+//				}
+				if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
+				{
+					if(Math.abs(Big_Text.left-Big_list.left)<100
+							&&Big_Text.width+Big_Text.left<=Big_list.width
+							&&Math.abs(Big_Text.top-Big_list.top)<100
+							&&Big_Text.height+Big_Text.top<=Big_list.height)
+					{
+						if(Big_Text.area*2>Big_List_area
+							&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
+						{
+//							System.out.println("Listcontaintext1"+Big_Text.area);
+							isListPage = false;
+						}
+						if(Big_Text!=null&&Big_Text.area*3>Big_List_area
+								&&(Big_Text.top-Big_list.top<100)&&(Big_Text.left-Big_list.left<200)
+								&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
+						{
+//							System.out.println("Listcontaintext2"+Big_Text.area);
+							isListPage = false;
+						}
+					}
+				}
+		}
+		if(Big_list!=null&&Big_Text==null&&Big_List_area>0)
+		{
+			if(Big_list.left<page.width/2)isListPage = true;
+		}
+
+		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
+		{
+			Element e = IsHasText(Big_list);
+//			if(e!=null)System.out.println("Listcontaintext"+e.area);
+			if(e!=null&&e.area>Big_List_area)isListPage = false;
+			if(e!=null&&e.area*2>Big_List_area
+					&&e.left<page.width/2&&e.top<page.height/2)
+			{
+//				System.out.println("Listcontaintext1"+e.area);
+				isListPage = false;
+			}
+			
+			if(e!=null&&e.area*3>Big_List_area
+					&&(e.top-Big_list.top<100)&&(e.left-Big_list.left<200)
+					&&e.left<page.width/2&&e.top<page.height/2)
+			{
+//				System.out.println("Listcontaintext2"+e.area);
+				isListPage = false;
+			}
+			
+//			if(e!=null)
+//			{
+//				System.out.println("Text Height:"+e.height+"|"+Big_Text.top);
+//				System.out.println("List Height:"+Big_list.height+"|"+Big_list.top);
+//				System.out.println("page:"+page.width+"|"+page.height);
+//				System.out.println("e:"+e.left+"|"+e.top);
+//				System.out.println("area:"+e.area*4+"|"+Big_List_area);
+//			}
+			//横向
+			if(e!=null&&e.area*4>Big_List_area
+					&&e.left<page.width/2
+					&&e.top<page.height/2
+					&&e.left>=Big_list.left
+					&&(e.width+Big_Text.left+100>=Big_list.width+Big_list.left))
+			{
+				System.out.println("横向:"+e.area);
+				isListPage = false;
+			}
+			//纵向
+			if(e!=null&&e.area*4>Big_List_area
+					&&e.left<page.width/2
+					&&e.top<page.height/2
+					&&e.top>=Big_list.top
+					&&(e.height+Big_Text.top+100>=Big_list.height+Big_list.top))
+			{
+				System.out.println("纵向:"+e.area);
+				isListPage = false;
+			}
+		}
+//		if(Big_List_area==0&&Big_Text_area==0)isListPage=true;
+//		System.out.println("text_num"+text_num);
+//		System.out.println("list_num"+list_num);
+//		System.out.println("Big_List_area"+Big_List_area);
+//		System.out.println("Big_Text_area"+Big_Text_area);
+//		System.out.println("Big_List_left"+Big_List_left);
+//		System.out.println("Big_Text_left"+Big_Text_left);
+//		System.out.println("Big_List_top"+Big_List_top);
+//		System.out.println("Big_Text_top"+Big_Text_top);
+		return;
+	}
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException, SAXException {
 		int index = 1913;
-		FileInputStream f_stream = new FileInputStream(new File("519Pages\\t1026.html"));
-		byte[] bs = new byte[1024*1024*4];
-		int len = f_stream.read(bs);
-		String s = new String(bs, 0, len, "UTF-8");
+		
 		ListBlockExtractor		htmlContentHandler		= new ListBlockExtractor();
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
-		
-		try {
-	//		htmlContentHandler.setUrl("http://www.iqiyi.com/yinyue/20121214/10453bddc18b141b.html");
-			parser.parse(new InputSource(new StringReader(s)));
-			if (htmlContentHandler.red != null) {
-				System.out.println(htmlContentHandler.red.has_list);
+		FileInputStream f_stream = null;
+//		int i=7;
+		int i=1;
+		while(i<=100)
+		{
+			String name="t"+i;
+//			String name="t1026";
+			File file = new File("D:\\JavaWorkplace\\sogou\\601Pages\\"+name+".html");
+//			file = new File("D:\\JavaWorkplace\\sogou\\data\\LastNewPage\\t497.html");
+//			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t"+num+".html");
+//			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t1408.html");
+//			file = new File("D:\\JavaWorkplace\\sogou\\data\\NewPage\\t798.html");
+			if(!file.exists())
+			{
+				i++;
+				continue;
 			}
-			Counter cnt = new Counter();
-			String out = htmlContentHandler.root.traverse_debug(cnt);
-		//	System.out.println(out);
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("tt.html")), "utf8"));
-		//	writer.write("<base href=\"" + opw.url.toString() + "\">\n");
-		//	writer.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\">\n");
-			writer.write(out);
-			writer.flush();
-			writer.close();
-		}  catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String tempString = null,s=null,url=null;
+			int line=1;
+			while ((tempString = reader.readLine()) != null) {
+				if(line==1)url = tempString;
+				else s+=tempString;
+				line++;
+				tempString=null;
+			}
+			try {
+		//		htmlContentHandler.setUrl("http://www.iqiyi.com/yinyue/20121214/10453bddc18b141b.html");
+				parser.parse(new InputSource(new StringReader(s)));
+				if (htmlContentHandler.red != null) {
+					System.out.println(htmlContentHandler.red.has_list);
+				}
+				System.out.println(i+"|"+htmlContentHandler.isListPage);
+				Counter cnt = new Counter();
+				String out = htmlContentHandler.root.traverse_debug(cnt);
+			//	System.out.println(out);
+				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("ListPages\\"+name+".html")), "utf8"));
+			//	writer.write("<base href=\"" + opw.url.toString() + "\">\n");
+			//	writer.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\">\n");
+				writer.write(out);
+				writer.flush();
+				writer.close();
+			}  catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			i++;
+		}
 
 	}
 } 
