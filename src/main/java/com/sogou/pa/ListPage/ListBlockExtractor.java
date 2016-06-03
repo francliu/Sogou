@@ -1251,12 +1251,13 @@ public class ListBlockExtractor implements ContentHandler {
 		{
 			e.is_list = false;
 		}
-		if(e.name.compareTo("table")==0)
-		{
-			list_num=getListNum(e);
-			if(list_num>3)e.is_list = true;
-			if(list_num==1)e.is_list = false;
-		}
+//		if(e.name.compareTo("table")==0)
+//		{
+//			list_num=getListNum(e);
+//			if(list_num>10)e.is_list = true;
+//			if(list_num==1&&e.area<10000)e.is_list = false;
+//			else if(list_num==2&&e.area<50000)e.is_list = false;
+//		}
 		
 	}
 	
@@ -1859,10 +1860,18 @@ public class ListBlockExtractor implements ContentHandler {
 	}
 	public int  OtherContentLen(Element e){
 		int area=0;
+		int text_num=0;
+		int img_num=0;
 		for(Element c:e.children)
 		{
-			if(c.is_text||c.name.compareTo("img")==0){
+			if(c.is_text&&text_num<3){
 				area += c.area;
+				text_num++;
+			}
+			else if(c.name.compareTo("img")==0&&img_num==1)
+			{
+				area+=10000;
+				img_num++;
 			}
 			else{
 				area += OtherContentLen(c);
@@ -2068,6 +2077,7 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 			int otherarea = OtherContentLen(Big_list);
 			System.out.println("otherarea:"+otherarea);
+			if(otherarea*2>Big_List_area)isListPage = false;
 //			if(otherarea*2>Big_List_area)isListPage = false;
 		}
 //		if(Big_List_area==0&&Big_Text_area==0)isListPage=false;
@@ -2089,13 +2099,13 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 		FileInputStream f_stream = null;
-		int i=73;
+		int i=136;
 //		int i=1;
-//		while(i<=100)
+//		while(i<=150)
 		{
 			String name="t"+i;
 //			String name="t1026";
-			File file = new File("D:\\JavaWorkplace\\sogou\\601Pages\\"+name+".html");
+			File file = new File("D:\\JavaWorkplace\\sogou\\530ListPage\\"+name+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\LastNewPage\\t497.html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t"+num+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t1408.html");

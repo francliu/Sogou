@@ -70,7 +70,7 @@ public class PrintElement {
 			}
 			*/
 		}
-    	else if (this.is_text) {
+    	else if (this.is_text&&!this.in_text) {
     		added_border = "border:8px solid #FF34B3;";
     		is_add_border = true;
     	}
