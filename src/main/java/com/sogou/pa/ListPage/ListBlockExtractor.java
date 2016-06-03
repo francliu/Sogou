@@ -162,6 +162,7 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		if (e.is_list) {
 			Element t = e;
+			PrintElement roots = root;
 			t.tobottom = page.height-(t.top+t.height);
 			double[] att_vals = {boolean2Int(t.is_displaynone),Math.atan(t.top) , Math.atan(t.left), Math.atan(t.height), Math.atan(t.width), Math.atan(t.area), Math.atan(t.text_len), Math.atan(t.own_text_len), Math.atan(t.anchor_len), Math.atan(t.anchor_num), Math.atan((double)t.anchor_len/(t.text_len-t.anchor_len)), Math.atan(t.img_num), Math.atan(t.child_num), Math.atan(t.fake_child_num), Math.atan(t.input_area), Math.atan(t.area_list), Math.atan(t.area_other), Math.atan(t.list_num1), Math.atan(t.strict_list_num1), Math.atan(t.indiffent_child_num1), Math.atan(t.list_num2), Math.atan(t.strict_list_num2), Math.atan(t.indiffent_child_num2), Math.atan(t.list_num3), Math.atan(t.indiffent_child_num3), Math.atan(t.big_list_num), Math.atan(t.biggest_child_area), Math.atan(t.biggest_img_area), Math.atan(t.biggest_img_width), Math.atan(t.most_img_num), Math.atan(t.child_arrange_style), Math.atan(t.first_second_child_ratio), Math.atan(t.tobottom), Math.atan(t.longest_own_text_len), Math.atan(t.child_height2width), Math.atan(t.tall_child_num), Math.atan((double)t.friend_link_area/(t.area+1)), Math.atan((double)t.full_list_area/(t.area+1)), Math.atan(t.text_len-t.full_list_len), Math.atan(t.text_len-t.anchor_len), boolean2Int(t.has_intro), boolean2Int(t.has_sub_title), boolean2Int(t.is_sub_title), boolean2Int(t.has_merged), boolean2Int(t.is_bold), boolean2Int(t.is_time), boolean2Int(t.list_of_subtitle), boolean2Int(t.list_of_keyword), boolean2Int(t.has_repeat_sb_structure), boolean2Int(t.has_other_block), boolean2Int(t.child_is_small), boolean2Int(t.has_one_child), 1};
 		/*
@@ -185,14 +186,25 @@ public class ListBlockExtractor implements ContentHandler {
 					System.out.println("asdf: " + result);
 				}
 				*/
-				if (Math.abs(result-1.0)<0.01) {
+				if (Math.abs(result-1.0)<0.01&&t.name.toLowerCase().compareTo("html")!=0) {
 					t.is_list = true;
 					t.pe.is_list = true;
-					list_blocks.add(t);
+					roots.is_list = true;
+					
 				} else {
 					t.is_list = false;
 					t.pe.is_list = false;
+					roots.is_list = false;
 				}
+//				if(
+//						||t.name.toLowerCase().compareTo("body")==0
+//						||t.name.toLowerCase().compareTo("head")==0)
+//				{
+//					t.is_list = false;
+//					t.pe.is_list = false;
+//					roots.is_list = false;
+//				}
+				if(t.is_list)list_blocks.add(t);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -246,6 +258,10 @@ public class ListBlockExtractor implements ContentHandler {
 			//style_attr = style_attr.replaceAll("[ \t\r\n]?(&nbsp;)?(&gt;)?", "");
 			if (href_attr.length() > 0)
 				e.src = href_attr;
+		}
+		else
+		{
+			e.src = atts.getValue("url");
 		}
 		String style = atts.getValue("webkit_style");
 		//String style = atts.getValue("style");
@@ -801,7 +817,12 @@ public class ListBlockExtractor implements ContentHandler {
 				++indiffent_child_num;
 				continue;
 			}
-			if (child.name.equals("li") || child.name.equals("dd") || child.name.equals("dt")) {
+			if (child.name.equals("li")
+					|| child.name.equals("dd") 
+					|| child.name.equals("dt")
+					|| child.name.equals("tr")
+					|| child.name.equals("th")
+					|| child.name.equals("td")) {
 				if (child.anchor_len > 0) {
 					++list_num;
 				} else if (child.anchor_num > 0 && child.img_num > 0) {
@@ -1109,6 +1130,7 @@ public class ListBlockExtractor implements ContentHandler {
 		list_num = 0;
 		boolean has_other_block = false;
 		if (e.child_num < 5) {
+			
 			for (Element child: e.children) {
 				if (isIndiffentBlock(child)) {
 					
@@ -1128,7 +1150,7 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 		}
 
-		
+//		System.out.println(e.child_num);
 		if (e.child_num > 1) {
 			int t = 0;
 			for (; t < e.child_num;++t) {
@@ -1191,7 +1213,6 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 			
 		}
-
 		
 		if (e.has_intro) {
 			e.is_list = false;
@@ -1199,10 +1220,59 @@ public class ListBlockExtractor implements ContentHandler {
 		if (e.longest_own_text_len > 50) {
 			e.is_list = false;
 		}
-
+		isListExtend(e);
 	}
 
+	public void isListExtend(Element e)
+	{
+		int list_num=0;
+		int list_area=0;
+		int other_num=0;
+		int other_area=0;
+		if (e.is_list && e.child_num > 2) {
+			for (int i = 1; i < e.child_num; i++) {
+				Element child = e.children.get(i);
+				if (!child.is_list||child.is_text) {
+					other_num++;
+					list_area+=child.area;
+				}
+				else
+				{
+					list_num++;
+					other_area+=child.area;
+				}
+			}
+		}
+		if(list_area*3<other_area&&other_area>e.area/2)
+		{
+			e.is_list = false;
+		}
+		if(list_num==0&&other_area>0)
+		{
+			e.is_list = false;
+		}
+		if(e.name.compareTo("table")==0)
+		{
+			list_num=getListNum(e);
+			if(list_num>3)e.is_list = true;
+			if(list_num==1)e.is_list = false;
+		}
+		
+	}
 	
+	public int getListNum(Element e)
+	{
+		int list_num=0;
+		for(Element c:e.children)
+		{
+			if(c.src!=null)
+			{
+				list_num++;
+			}
+			else list_num+=getListNum(c);
+		}
+		return list_num;
+	}
 	private void isFooter(Element e) {
 		if ((e.width >= 800 || e.width > page.width)
 				&& e.top + e.height + 30 > page.height
@@ -1549,7 +1619,19 @@ public class ListBlockExtractor implements ContentHandler {
 				}
 			}
 		}
-
+		if (!e.is_text && !e.is_text_can && e.child_num > 2) {
+			for (int i = 1; i < e.child_num; i++) {
+				Element child = e.children.get(i);
+				if (child.is_text||child.name.contains("img")) {
+					Element pre = e.children.get(i-1);
+					if (pre.is_sub_title && !pre.is_recommand_title) {
+						pre.is_text = true;
+						pre.pe.is_text = true;
+					}
+//					System.out.println("aaaaa ");
+				}
+			}
+		}
 		/*
 		if (e.class_attr.equals("Pannel") && e.top == 21616 && e.height == 278) {
 			System.out.println("asdf " + e.tag_num + "\t" + (e.text_len-e.anchor_len));
@@ -1618,7 +1700,7 @@ public class ListBlockExtractor implements ContentHandler {
 			for (Element child: e.children) {
 				if (child.name.length() == 0) {
 					e.text_len += child.text_len;
-					if (e.name.equals("a")) {
+					if (e.name.equals("a")||e.src!=null) {
 						e.anchor_len += child.text_len;
 						e.anchor_num = 1;
 					}
@@ -1626,7 +1708,7 @@ public class ListBlockExtractor implements ContentHandler {
 					
 				} else if (!child.is_displaynone) {
 					e.text_len += child.text_len;
-					if (e.name.equals("a")) {
+					if (e.name.equals("a")||e.src!=null) {
 						e.anchor_len += child.text_len;
 						e.anchor_num = 1;
 					} else {
@@ -1676,10 +1758,13 @@ public class ListBlockExtractor implements ContentHandler {
 			if (e.is_footer) {
 				pe.is_footer = true;
 			}
-			isText(e);
-			if (e.is_text) {
-				pe.is_text = true;
-				text_blocks.add(e);
+			if(!e.is_list)
+			{
+				isText(e);
+				if (e.is_text) {
+					pe.is_text = true;
+					text_blocks.add(e);
+				}
 			}
 		//	e.children.clear();
 			if (parent != null) {
@@ -1726,10 +1811,10 @@ public class ListBlockExtractor implements ContentHandler {
 				element.children.add(child);
 				element.own_text_len += len;
 				if (element.longest_own_text_len < len) {
-					element .longest_own_text_len = len;
+					element.longest_own_text_len = len;
 				}
 				if (element.longest_text_len < len) {
-					element .longest_text_len = len;
+					element.longest_text_len = len;
 				}
 			}
 		}
@@ -1772,6 +1857,19 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		return res;
 	}
+	public int  OtherContentLen(Element e){
+		int area=0;
+		for(Element c:e.children)
+		{
+			if(c.is_text||c.name.compareTo("img")==0){
+				area += c.area;
+			}
+			else{
+				area += OtherContentLen(c);
+			}
+		}
+		return area;
+	}
 	public void isListPage(){
 		if(is_abnormal_page)
 		{
@@ -1781,7 +1879,7 @@ public class ListBlockExtractor implements ContentHandler {
 		{
 			isListPage = true;
 			System.out.println("list_num");
-			return;
+//			return;
 		}
 		long Big_Text_area=0;
 		long Big_Text_left=0;
@@ -1801,24 +1899,35 @@ public class ListBlockExtractor implements ContentHandler {
 		long text_num=0;
 		for(Element e:text_blocks)
 		{
-			if(e.top>page.height*2/3||e.left>700||e.area<10000)continue;
-			text_num++;
-			if(frist_Text_area==0)
+			if(e.top>(page.height/2)||e.left>700||e.area<10000)
 			{
-				frist_Text_area = e.area;
-				frist_Text_left = e.left;
-				frist_Text_top = e.top;
+//				System.out.println("1e"+e.top+"|"+page.height);
+				continue;
 			}
-			if(e.area>Big_Text_area)
+			else
 			{
-				Big_Text_area = e.area;
-				Big_Text_left = e.left;
-				Big_Text_top = e.top;
-				Big_list = e;
+				text_num++;
+				if(frist_Text_area==0)
+				{
+					frist_Text_area = e.area;
+					frist_Text_left = e.left;
+					frist_Text_top = e.top;
+				}
+				if(e.area>Big_Text_area)
+				{
+					Big_Text_area = e.area;
+					Big_Text_left = e.left;
+					Big_Text_top = e.top;
+					Big_Text = e;
+				}
 			}
 		}
 		for(Element e:list_blocks)
 		{
+			if(e.name.contains("html"))
+			{
+				System.out.println(e.name);
+			}
 			if(e.top>page.height/2||e.left>700||e.area<5000)continue;
 			list_num++;
 			if(frist_List_area==0)
@@ -1832,7 +1941,7 @@ public class ListBlockExtractor implements ContentHandler {
 				Big_List_area = e.area;
 				Big_List_left = e.left;
 				Big_List_top = e.top;
-				Big_Text = e;
+				Big_list = e;
 			}
 		}
 		if(Big_list!=null&&Big_Text!=null&&Big_List_area>0)
@@ -1848,7 +1957,7 @@ public class ListBlockExtractor implements ContentHandler {
 					isListPage = true;
 					if(text_num>list_num*2)isListPage = false;
 				}
-				if(Big_List_area>Big_Text_area
+				if(!isListPage&&Big_List_area>Big_Text_area
 						&&list_num>=5&&text_num<=2
 						&&((Math.abs(Big_Text.top-Big_list.top)<100
 								||Big_Text_top-Big_List_top>500)
@@ -1856,14 +1965,30 @@ public class ListBlockExtractor implements ContentHandler {
 				{
 					isListPage = true;
 				}
-//				if(Big_List_area>Big_Text_area
-//						&&list_num>=5&&text_num<=4
-//						&&((Math.abs(Big_Text.top-Big_list.top)<100
-//								||Big_Text_top-Big_List_top>500)
-//								&&Big_List_top<page.height/2))
-//				{
-//					isListPage = true;
-//				}
+				if(!isListPage&&Big_List_area>3*Big_Text_area
+						&&list_num>=3
+						&&((Math.abs(Big_Text.top-Big_list.top)<400
+								||Math.abs(Big_Text_top-Big_List_top)<400)
+								&&Big_List_top<page.height/2))
+				{
+					isListPage = true;
+				}
+				if(!isListPage&&Big_List_area>7*Big_Text_area
+						&&list_num>=2
+						&&((Math.abs(Big_Text.top-Big_list.top)<400
+								||Math.abs(Big_Text_top-Big_List_top)<400)
+								&&Big_List_top<page.height/2))
+				{
+					isListPage = true;
+				}
+				if(!isListPage&&Big_List_area>10*Big_Text_area
+						&&list_num>=2
+						&&((Math.abs(Big_Text.top-Big_list.top)<700
+								||Math.abs(Big_Text_top-Big_List_top)<700)
+								&&Big_List_top<page.height/2))
+				{
+					isListPage = true;
+				}
 				if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
 				{
 					if(Math.abs(Big_Text.left-Big_list.left)<100
@@ -1889,7 +2014,8 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		if(Big_list!=null&&Big_Text==null&&Big_List_area>0)
 		{
-			if(Big_list.left<page.width/2)isListPage = true;
+			System.out.println("ListPage");
+			if(Big_list.left<page.width/2||(page.width==0&&Big_list.left<600))isListPage = true;
 		}
 
 		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
@@ -1940,16 +2066,19 @@ public class ListBlockExtractor implements ContentHandler {
 				System.out.println("纵向:"+e.area);
 				isListPage = false;
 			}
+			int otherarea = OtherContentLen(Big_list);
+			System.out.println("otherarea:"+otherarea);
+//			if(otherarea*2>Big_List_area)isListPage = false;
 		}
-//		if(Big_List_area==0&&Big_Text_area==0)isListPage=true;
-//		System.out.println("text_num"+text_num);
-//		System.out.println("list_num"+list_num);
-//		System.out.println("Big_List_area"+Big_List_area);
-//		System.out.println("Big_Text_area"+Big_Text_area);
-//		System.out.println("Big_List_left"+Big_List_left);
-//		System.out.println("Big_Text_left"+Big_Text_left);
-//		System.out.println("Big_List_top"+Big_List_top);
-//		System.out.println("Big_Text_top"+Big_Text_top);
+//		if(Big_List_area==0&&Big_Text_area==0)isListPage=false;
+		System.out.println("text_num"+text_num);
+		System.out.println("list_num"+list_num);
+		System.out.println("Big_List_area"+Big_List_area);
+		System.out.println("Big_Text_area"+Big_Text_area);
+		System.out.println("Big_List_left"+Big_List_left);
+		System.out.println("Big_Text_left"+Big_Text_left);
+		System.out.println("Big_List_top"+Big_List_top);
+		System.out.println("Big_Text_top"+Big_Text_top);
 		return;
 	}
 	@SuppressWarnings("resource")
@@ -1960,9 +2089,9 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 		FileInputStream f_stream = null;
-//		int i=7;
-		int i=1;
-		while(i<=100)
+		int i=73;
+//		int i=1;
+//		while(i<=100)
 		{
 			String name="t"+i;
 //			String name="t1026";
@@ -1974,7 +2103,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(!file.exists())
 			{
 				i++;
-				continue;
+//				continue;
 			}
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String tempString = null,s=null,url=null;

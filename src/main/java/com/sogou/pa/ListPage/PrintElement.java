@@ -56,12 +56,13 @@ public class PrintElement {
 		}
 		String added_border = "border:8px solid yellow;";
 		boolean is_add_border = false;
-    	if (this.is_list && !this.in_list) {
+    	if (this.is_list &&this.name.compareTo("html")!=0) {
 	//	if (this.is_list) {
 		
 	//	if (this.is_text && !this.in_text && !this.in_list && !this.is_list && !this.in_footer && !this.is_footer && !this.in_single_block) {
 				
 	//	if (this.is_footer) {
+    		
 			is_add_border = true;
 			/*
 			if (this.id != 0) {
@@ -69,7 +70,7 @@ public class PrintElement {
 			}
 			*/
 		}
-    	else if (this.is_text&&!this.in_text) {
+    	else if (this.is_text) {
     		added_border = "border:8px solid #FF34B3;";
     		is_add_border = true;
     	}

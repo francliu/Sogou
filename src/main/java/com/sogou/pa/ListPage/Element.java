@@ -12,6 +12,7 @@ public class Element {
 	String name;
 	String full_name;
 	boolean is_displaynone;
+	boolean is_has_url;
 	String id_attr;
 	String class_attr;
 	StringBuffer ids_classes;
@@ -94,6 +95,7 @@ public class Element {
 		name = "";
 		full_name = "";
 		is_displaynone = false;
+		is_has_url = false;
 		id_attr = "";
 		class_attr = "";
 		ids_classes = new StringBuffer();
