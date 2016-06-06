@@ -63,11 +63,13 @@ public class ListBlockExtractor implements ContentHandler {
 	HtmlPage page;
 	Element red;
 	Element green;
+	Element is_video;
 	Instances data_set;
 	Classifier cls;
 	boolean isListPage;
 	public ListBlockExtractor() {
 		isListPage = false;
+		is_video = null;
 		path = new LinkedList<Element>();
 		print_path = new LinkedList<PrintElement>();
 		xpath = new StringBuffer();
@@ -116,6 +118,7 @@ public class ListBlockExtractor implements ContentHandler {
 	
 	public void clear() {
 		isListPage = false;
+		is_video = null;
 		path.clear();
 		print_path.clear();
 		xpath.setLength(0);
@@ -241,6 +244,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if (id != null) {
 		//	id = id.replaceAll("[ \t\r\n]?(&nbsp;)?(&gt;)?", "");
 			if (id.length() > 0) {
+				if(id.toLowerCase().contains("player"))is_video = e;
 				e.id_attr = id;
 				e.ids_classes.append(id);
 			}
@@ -249,6 +253,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if (class_attr != null) {
 		//	class_attr = class_attr.replaceAll("[ \t\r\n]?(&nbsp;)?(&gt;)?", "");
 			if (class_attr.length() > 0) {
+				if(class_attr.toLowerCase().contains("player"))is_video = e;
 				e.class_attr = class_attr;
 				e.ids_classes.append(class_attr);
 			}
@@ -1243,14 +1248,14 @@ public class ListBlockExtractor implements ContentHandler {
 				}
 			}
 		}
-		if(list_area*3<other_area&&other_area>e.area/2)
-		{
-			e.is_list = false;
-		}
-		if(list_num==0&&other_area>0)
-		{
-			e.is_list = false;
-		}
+//		if(list_area*3<other_area&&other_area>e.area/2)
+//		{
+//			e.is_list = false;
+//		}
+//		if(list_num==0&&other_area>0)
+//		{
+//			e.is_list = false;
+//		}
 //		if(e.name.compareTo("table")==0)
 //		{
 //			list_num=getListNum(e);
@@ -1998,6 +2003,11 @@ public class ListBlockExtractor implements ContentHandler {
 				{
 					isListPage = true;
 				}
+				if(isListPage&&Big_Text_area>260000
+						&&Big_Text.top<Big_list.top&&Big_List_top<page.height/3)
+				{
+					isListPage = false;
+				}
 				if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
 				{
 					if(Math.abs(Big_Text.left-Big_list.left)<100
@@ -2080,15 +2090,20 @@ public class ListBlockExtractor implements ContentHandler {
 			if(otherarea*2>Big_List_area)isListPage = false;
 //			if(otherarea*2>Big_List_area)isListPage = false;
 		}
+		if(is_video!=null)
+		{
+			isListPage = false;
+//			if(is_video.left<page.width/2&&is_video.top<page.height/2)isListPage = false;
+		}
 //		if(Big_List_area==0&&Big_Text_area==0)isListPage=false;
-		System.out.println("text_num"+text_num);
-		System.out.println("list_num"+list_num);
-		System.out.println("Big_List_area"+Big_List_area);
-		System.out.println("Big_Text_area"+Big_Text_area);
-		System.out.println("Big_List_left"+Big_List_left);
-		System.out.println("Big_Text_left"+Big_Text_left);
-		System.out.println("Big_List_top"+Big_List_top);
-		System.out.println("Big_Text_top"+Big_Text_top);
+//		System.out.println("text_num"+text_num);
+//		System.out.println("list_num"+list_num);
+//		System.out.println("Big_List_area"+Big_List_area);
+//		System.out.println("Big_Text_area"+Big_Text_area);
+//		System.out.println("Big_List_left"+Big_List_left);
+//		System.out.println("Big_Text_left"+Big_Text_left);
+//		System.out.println("Big_List_top"+Big_List_top);
+//		System.out.println("Big_Text_top"+Big_Text_top);
 		return;
 	}
 	@SuppressWarnings("resource")
@@ -2099,9 +2114,9 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 		FileInputStream f_stream = null;
-		int i=136;
-//		int i=1;
-//		while(i<=150)
+//		int i=50;
+		int i=1;
+		while(i<=150)
 		{
 			String name="t"+i;
 //			String name="t1026";
@@ -2113,7 +2128,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(!file.exists())
 			{
 				i++;
-//				continue;
+				continue;
 			}
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String tempString = null,s=null,url=null;
