@@ -1889,7 +1889,7 @@ public class ListBlockExtractor implements ContentHandler {
 		{
 			return;
 		}
-		if(text_blocks.size()==0)
+		if(list_blocks.size()!=0&&text_blocks.size()==0)
 		{
 			isListPage = true;
 			System.out.println("list_num");
@@ -1911,10 +1911,16 @@ public class ListBlockExtractor implements ContentHandler {
 		Element Big_Text = null;
 		long list_num=0;
 		long text_num=0;
+		int special_situation_area=0;
+		int list_area=0;
+		int text_area=0;
+		int other_area=0;
 		for(Element e:text_blocks)
 		{
-			if(e.top>(page.height/2)||e.left>700||e.area<10000)
+			text_area+=e.area;
+			if(e.top>(page.height*2/3)||e.left>900||e.area<5000)
 			{
+				if(e.area>special_situation_area)special_situation_area=e.area;
 //				System.out.println("1e"+e.top+"|"+page.height);
 				continue;
 			}
@@ -1938,6 +1944,7 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		for(Element e:list_blocks)
 		{
+			list_area+=e.area;
 			if(e.name.contains("html"))
 			{
 				System.out.println(e.name);
@@ -1958,7 +1965,7 @@ public class ListBlockExtractor implements ContentHandler {
 				Big_list = e;
 			}
 		}
-		if(Big_list!=null&&Big_Text!=null&&Big_List_area>0)
+		if(Big_list!=null&&Big_Text!=null&&Big_List_area>0&&(Big_List_left!=0||Big_Text_top!=0))
 		{
 				if(Big_List_area>Big_Text_area
 						&&(Math.abs(Big_Text.left-Big_list.left)<100&&Big_List_left<500)
@@ -2031,7 +2038,7 @@ public class ListBlockExtractor implements ContentHandler {
 					}
 				}
 		}
-		if(Big_list!=null&&Big_Text==null&&Big_List_area>0)
+		if(Big_list!=null&&Big_Text==null&&Big_List_area>0&&(Big_List_left!=0||Big_Text_top!=0))
 		{
 			System.out.println("ListPage");
 			if(Big_list.left<page.width/2||(page.width==0&&Big_list.left<600))isListPage = true;
@@ -2088,8 +2095,9 @@ public class ListBlockExtractor implements ContentHandler {
 			int otherarea = OtherContentLen(Big_list);
 			System.out.println("otherarea:"+otherarea);
 			if(otherarea*2>Big_List_area)isListPage = false;
-//			if(otherarea*2>Big_List_area)isListPage = false;
 		}
+		if(special_situation_area>page.width*page.height/2)isListPage = false;
+		if(text_area>list_area*2)isListPage = false;
 		if(is_video!=null)
 		{
 			isListPage = false;
@@ -2108,15 +2116,13 @@ public class ListBlockExtractor implements ContentHandler {
 	}
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException, SAXException {
-		int index = 1913;
 		
 		ListBlockExtractor		htmlContentHandler		= new ListBlockExtractor();
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
-		FileInputStream f_stream = null;
-//		int i=50;
-		int i=1;
-		while(i<=150)
+//		int i=151;
+		int i=151;
+		while(i<=200)
 		{
 			String name="t"+i;
 //			String name="t1026";
