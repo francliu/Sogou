@@ -73,6 +73,8 @@ public class Element {
 	
 	boolean is_single_block;
 	boolean is_list;
+	boolean in_list;
+	boolean in_text;
 	boolean is_text;
 	boolean is_text_can;
 	boolean is_footer;
@@ -138,6 +140,8 @@ public class Element {
 		children = new ArrayList<Element>();
 		has_intro = false;
 		is_list = false;
+		in_list = false;
+		in_text = false;
 		is_text = false;
 		is_text_can = false;
 		is_footer = false;
