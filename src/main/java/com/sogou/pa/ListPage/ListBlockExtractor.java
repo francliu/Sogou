@@ -67,9 +67,47 @@ public class ListBlockExtractor implements ContentHandler {
 	Instances data_set;
 	Classifier cls;
 	boolean isListPage;
+	boolean is_stop;
+	boolean author;
+	boolean latestArictle;
+	boolean showAllfloors;
+	boolean registers;
+	boolean theTimeReport;
+	boolean TecentBlog;
+	boolean share;
+	boolean haveSolvedquestion;
+	boolean answers;
+	boolean check;
+	boolean reply;
+	boolean publish;
+	boolean origin;
+	boolean readtimes;
+	boolean novel;
+	boolean nextPage;
+	boolean album;
+	boolean position;
 	public ListBlockExtractor() {
 		isListPage = false;
 		is_video = null;
+		is_stop = false;
+		author = false;
+		latestArictle = false;
+		showAllfloors = false;
+		registers = false;
+		theTimeReport = false;
+		TecentBlog = false;
+		share = false;
+		haveSolvedquestion = false;
+		answers = false;
+		check = false;
+		reply = false;
+		publish = false;
+		origin = false;
+		readtimes = false;
+		novel = false;
+		nextPage = false;
+		album = false;
+		position = false;
 		path = new LinkedList<Element>();
 		print_path = new LinkedList<PrintElement>();
 		xpath = new StringBuffer();
@@ -119,6 +157,25 @@ public class ListBlockExtractor implements ContentHandler {
 	public void clear() {
 		isListPage = false;
 		is_video = null;
+		is_stop = false;
+		author = false;
+		latestArictle = false;
+		showAllfloors = false;
+		registers = false;
+		theTimeReport = false;
+		TecentBlog = false;
+		share = false;
+		haveSolvedquestion = false;
+		answers = false;
+		check = false;
+		reply = false;
+		publish = false;
+		origin = false;
+		readtimes = false;
+		novel = false;
+		nextPage = false;
+		album = false;
+		position = false;
 		path.clear();
 		print_path.clear();
 		xpath.setLength(0);
@@ -244,7 +301,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if (id != null) {
 		//	id = id.replaceAll("[ \t\r\n]?(&nbsp;)?(&gt;)?", "");
 			if (id.length() > 0) {
-				if(id.toLowerCase().contains("player"))is_video = e;
+				if(id.toLowerCase().contains("player"))is_stop = true;
 				e.id_attr = id;
 				e.ids_classes.append(id);
 			}
@@ -253,7 +310,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if (class_attr != null) {
 		//	class_attr = class_attr.replaceAll("[ \t\r\n]?(&nbsp;)?(&gt;)?", "");
 			if (class_attr.length() > 0) {
-				if(class_attr.toLowerCase().contains("player"))is_video = e;
+				if(class_attr.toLowerCase().contains("player"))is_stop = true;
 				e.class_attr = class_attr;
 				e.ids_classes.append(class_attr);
 			}
@@ -269,6 +326,15 @@ public class ListBlockExtractor implements ContentHandler {
 			e.src = atts.getValue("url");
 		}
 		String style = atts.getValue("webkit_style");
+		String title = atts.getValue("title");
+		if(title!=null)
+		{
+			 if(title.contains("上一张")||title.contains("上一张"))
+			 {
+				 is_stop = true;
+				 return;
+			 }
+		}
 		//String style = atts.getValue("style");
 		if (style != null && style.length() != 0) {
 			String[] segs = style.split(";");
@@ -329,7 +395,7 @@ public class ListBlockExtractor implements ContentHandler {
 	}
 	
 	public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
-		if (is_abnormal_page) {
+		if (is_abnormal_page||is_stop) {
 			return;
 		}
 		if (xpath.length() > 2000) {
@@ -1682,9 +1748,10 @@ public class ListBlockExtractor implements ContentHandler {
 	
 
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if (is_abnormal_page) {
+		if (is_abnormal_page||is_stop) {
 			return;
 		}
+		
 		Element e = path.peekLast();
 
 		if (qName.equalsIgnoreCase(e.name)) {
@@ -1784,7 +1851,7 @@ public class ListBlockExtractor implements ContentHandler {
 
 	
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (is_abnormal_page) {
+		if (is_abnormal_page||is_stop) {
 			return;
 		}
 
@@ -1801,6 +1868,108 @@ public class ListBlockExtractor implements ContentHandler {
 		if (element.name.equalsIgnoreCase("script") || element.name.equalsIgnoreCase("style")) {
 			return;
 		}
+		//列表页的召回率:91|135|0.674074074074074
+		//列表页的准确率:91|127|0.7165354330708661
+
+		if(s.contains("作者"))author = true;
+		if(s.contains("最新章节"))latestArictle = true;
+		if(author&&latestArictle){
+			is_stop=true;
+			return;
+		}
+		if(s.contains("有码无码"))
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("会员"))registers = true;
+		if(s.contains("发表于"))theTimeReport = true;
+		if(registers&&(theTimeReport||s.contains("楼主"))){
+			is_stop=true;
+			return;
+		}
+		if(s.contains("腾讯微博")||s.toLowerCase().contains("tencent weibo"))TecentBlog = true;
+		if(s.contains("分享到"))share = true;
+		if(TecentBlog&&(share||s.contains("作者删除"))){
+			is_stop=true;
+			return;
+		}
+		if(s.contains("已解决问题"))haveSolvedquestion = true;
+		if(s.contains("满意答案"))answers = true;
+		if(haveSolvedquestion||answers)
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("我的相册"))album=true;
+		if(album&&(s.contains("上一张")||s.contains("下一张")))
+		{
+			is_stop=true;
+			return;
+		}
+
+		if(s.contains("查看"))check=true;
+		if(s.contains("全部楼层"))showAllfloors=true;
+		if(s.contains("回复"))reply=true;
+		if(check&&reply||showAllfloors){
+			is_stop=true;
+			return;
+		}
+		if(s.contains("发布"))publish=true;
+		if(s.contains("来源于"))origin=true;
+		if(s.contains("浏览次数"))readtimes=true;
+		if(publish&&(origin||readtimes))
+		{
+			is_stop=true;
+			return;
+		}
+//		if(s.contains("小说"))novel=true;
+//		if(s.contains("下一页"))nextPage=true;
+//		if(novel&&nextPage)
+//		{
+//			is_stop=true;
+//			return;
+//		}
+		if(s.contains("您的位置")||s.contains("当前位置")||s.contains("您现在的位置"))position=true;
+		if(position&&(s.contains("上一篇")||s.contains("下一篇")
+				||s.contains("前一篇")||s.contains("后一篇")
+				||s.contains("下一条")||s.contains("下一条")))
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("你现在正在浏览"))
+		{
+			is_stop=true;
+			return;
+		}
+		/**
+		 * 列表页的召回率:97|136|0.7132352941176471
+		 * 列表页的准确率:97|124|0.782258064516129
+		 */
+		if(element.top<300&&element.left<300)
+		{
+			if(s.contains("您现在的位置"))
+			{
+				is_stop=true;
+				return;
+			}
+		}
+		/**
+		 * 列表页的召回率:96|135|0.7111111111111111
+		       列表页的准确率:96|136|0.7058823529411765
+		 */
+//		/**
+//		 * s.contains("当前位置")
+//				||s.contains("职位招聘")
+//				||s.contains("您现在的位置")
+//				||s.contains("你现在正在浏览")
+//		s.contains("您的位置")||s.contains("上一篇")||s.contains("下一篇")
+//		||s.contains("前一篇")||s.contains("后一篇")
+//		||s.contains("显示全部楼层")
+//		
+//		 */
+		
 		StringBuffer out = new StringBuffer();
 		int len = PageSegmentation.cleanString(s, out);
 		if (out.length() > 0) {
@@ -1935,10 +2104,14 @@ public class ListBlockExtractor implements ContentHandler {
 		int src_num=0;
 		int strict_src_num=0;
 		int mid_text_num=0;
+		int mid_list_area=0;
+		int mid_text_area=0;
+		int mid_other_area=0;
 		for(Element e:text_blocks)
 		{
 //			if(e.in_text)continue;
 			text_area+=e.area;
+			if(!e.in_text&&e.top>400&&e.top<900&&e.left<page.width/2)mid_text_area+=e.area;
 			if((page.height!=0&&page.width!=0)&&(e.top>(page.height*2/3)||(e.in_text&&e.area<160000)||e.left>900||e.area<5000))
 			{
 				if(e.area>special_situation_area)special_situation_area=e.area;
@@ -1968,7 +2141,9 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		for(Element e:list_blocks)
 		{
+			
 			if(e.in_list)continue;
+			if(e.top>400&&e.top<800&&e.left<page.width/2)mid_list_area+=e.area;
 			list_area+=e.area;
 			if(e.name.contains("html"))
 			{
@@ -2007,7 +2182,7 @@ public class ListBlockExtractor implements ContentHandler {
 //					System.out.println("ok");
 					
 					isListPage = true;
-					if(text_num>list_num*2)isListPage = false;
+//					if(text_num>list_num*2)isListPage = false;
 				}
 
 				if(!isListPage&&Big_List_area>Big_Text_area
@@ -2078,40 +2253,32 @@ public class ListBlockExtractor implements ContentHandler {
 				{
 					isListPage = true;
 				}
-				if(isListPage&&Big_Text_area>260000
-						&&Big_Text.top<Big_list.top&&Big_List_top<page.height/3)
-				{
-					isListPage = false;
-				}
-				if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
-				{
-					if(Math.abs(Big_Text.left-Big_list.left)<100
-							&&Big_Text.width+Big_Text.left<=Big_list.width
-							&&Math.abs(Big_Text.top-Big_list.top)<100
-							&&Big_Text.height+Big_Text.top<=Big_list.height)
-					{
-						if(Big_Text.area*2>Big_List_area
-							&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
-						{
-//							System.out.println("Listcontaintext1"+Big_Text.area);
-							isListPage = false;
-						}
-						if(Big_Text!=null&&Big_Text.area*3>Big_List_area
-								&&(Big_Text.top-Big_list.top<100)&&(Big_Text.left-Big_list.left<200)
-								&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
-						{
-//							System.out.println("Listcontaintext2"+Big_Text.area);
-							isListPage = false;
-						}
-					}
-				}
-				//123case
-//				if(Big_Text_area>40000
-//						&&Big_List_top>Big_Text_top
-//						&&Big_Text_top<=page.height/3
-//						&&Big_List_top-Big_Text_top>=200)
+//				if(isListPage&&Big_Text_area>260000
+//						&&Big_Text.top<Big_list.top&&Big_List_top<page.height/3)
 //				{
 //					isListPage = false;
+//				}
+//				if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
+//				{
+//					if(Math.abs(Big_Text.left-Big_list.left)<100
+//							&&Big_Text.width+Big_Text.left<=Big_list.width
+//							&&Math.abs(Big_Text.top-Big_list.top)<100
+//							&&Big_Text.height+Big_Text.top<=Big_list.height)
+//					{
+//						if(Big_Text.area*2>Big_List_area
+//							&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
+//						{
+////							System.out.println("Listcontaintext1"+Big_Text.area);
+//							isListPage = false;
+//						}
+//						if(Big_Text!=null&&Big_Text.area*3>Big_List_area
+//								&&(Big_Text.top-Big_list.top<100)&&(Big_Text.left-Big_list.left<200)
+//								&&Big_Text.left<page.width/2&&Big_Text.top<page.height/2)
+//						{
+////							System.out.println("Listcontaintext2"+Big_Text.area);
+//							isListPage = false;
+//						}
+//					}
 //				}
 		}
 
@@ -2151,79 +2318,81 @@ public class ListBlockExtractor implements ContentHandler {
 		{
 			isListPage=true;
 		}
-		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
-		{
-			Element e = IsHasText(Big_list);
-//			if(e!=null)System.out.println("Listcontaintext"+e.area);
-			if(e!=null&&e.area>Big_List_area)isListPage = false;
-			if(e!=null&&e.area*2>Big_List_area
-					&&e.left<page.width/2&&e.top<page.height/2)
-			{
-//				System.out.println("Listcontaintext1"+e.area);
-				isListPage = false;
-			}
-			
-			if(e!=null&&e.area*3>Big_List_area
-					&&(e.top-Big_list.top<100)&&(e.left-Big_list.left<200)
-					&&e.left<page.width/2&&e.top<page.height/2)
-			{
-//				System.out.println("Listcontaintext2"+e.area);
-				isListPage = false;
-			}
-			
-//			if(e!=null)
+//		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
+//		{
+//			Element e = IsHasText(Big_list);
+////			if(e!=null)System.out.println("Listcontaintext"+e.area);
+//			if(e!=null&&e.area>Big_List_area)isListPage = false;
+//			if(e!=null&&e.area*2>Big_List_area
+//					&&e.left<page.width/2&&e.top<page.height/2)
 //			{
-//				System.out.println("Text Height:"+e.height+"|"+Big_Text.top);
-//				System.out.println("List Height:"+Big_list.height+"|"+Big_list.top);
-//				System.out.println("page:"+page.width+"|"+page.height);
-//				System.out.println("e:"+e.left+"|"+e.top);
-//				System.out.println("area:"+e.area*4+"|"+Big_List_area);
+////				System.out.println("Listcontaintext1"+e.area);
+//				isListPage = false;
 //			}
-			//横向
-			if(e!=null&&e.area*4>Big_List_area
-					&&e.left<page.width/2
-					&&e.top<page.height/2
-					&&e.left>=Big_list.left
-					&&(e.width+Big_Text.left+100>=Big_list.width+Big_list.left))
-			{
-				System.out.println("横向:"+e.area);
-				isListPage = false;
-			}
-			//纵向
-			if(e!=null&&e.area*4>Big_List_area
-					&&e.left<page.width/2
-					&&e.top<page.height/2
-					&&e.top>=Big_list.top
-					&&(e.height+Big_Text.top+100>=Big_list.height+Big_list.top))
-			{
-				System.out.println("纵向:"+e.area);
-				isListPage = false;
-			}
-			//纵向
-			if(e!=null&&e.area*5>Big_List_area
-					&&e.left<page.width/2
-					&&e.top<page.height/2
-					&&e.top>=Big_list.top
-					&&(e.height+Big_Text.top+100>=Big_list.height+Big_list.top))
-			{
-				isListPage = true;
-			}
-			int otherarea = OtherContentLen(Big_list);
-			System.out.println("otherarea:"+otherarea);
-			if(!(Big_List_area>=5*Big_Text_area
-						&&list_num*5<=text_num))
-			{
-				if(otherarea*2.5>Big_List_area)isListPage = false;
-			}
-		}
-		
-		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&special_situation_area>page.width*page.height/2)isListPage = false;
-		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&text_area>list_area*2)isListPage = false;
-		if(is_video!=null)
-		{
-			isListPage = false;
-//			if(is_video.left<page.width/2&&is_video.top<page.height/2)isListPage = false;
-		}
+//			
+//			if(e!=null&&e.area*3>Big_List_area
+//					&&(e.top-Big_list.top<100)&&(e.left-Big_list.left<200)
+//					&&e.left<page.width/2&&e.top<page.height/2)
+//			{
+////				System.out.println("Listcontaintext2"+e.area);
+//				isListPage = false;
+//			}
+//			
+////			if(e!=null)
+////			{
+////				System.out.println("Text Height:"+e.height+"|"+Big_Text.top);
+////				System.out.println("List Height:"+Big_list.height+"|"+Big_list.top);
+////				System.out.println("page:"+page.width+"|"+page.height);
+////				System.out.println("e:"+e.left+"|"+e.top);
+////				System.out.println("area:"+e.area*4+"|"+Big_List_area);
+////			}
+//			//横向
+//			if(e!=null&&e.area*4>Big_List_area
+//					&&e.left<page.width/2
+//					&&e.top<page.height/2
+//					&&e.left>=Big_list.left
+//					&&(e.width+Big_Text.left+100>=Big_list.width+Big_list.left))
+//			{
+//				System.out.println("横向:"+e.area);
+//				isListPage = false;
+//			}
+//			//纵向
+//			if(e!=null&&e.area*4>Big_List_area
+//					&&e.left<page.width/2
+//					&&e.top<page.height/2
+//					&&e.top>=Big_list.top
+//					&&(e.height+Big_Text.top+100>=Big_list.height+Big_list.top))
+//			{
+//				System.out.println("纵向:"+e.area);
+//				isListPage = false;
+//			}
+//			//纵向
+//			if(e!=null&&e.area*5>Big_List_area
+//					&&e.left<page.width/2
+//					&&e.top<page.height/2
+//					&&e.top>=Big_list.top
+//					&&(e.height+Big_Text.top+100>=Big_list.height+Big_list.top))
+//			{
+//				isListPage = false;
+//			}
+//			int otherarea = OtherContentLen(Big_list);
+//			System.out.println("otherarea:"+otherarea);
+//			if(!(Big_List_area>=5*Big_Text_area
+//						&&list_num*5<=text_num))
+//			{
+//				if(otherarea*2.5>Big_List_area)isListPage = false;
+//			}
+//		}
+//		if(Big_Text_left<page.width/2&&Big_Text_top<page.height/2&&Big_Text_area>100000
+//				&&Big_List_area<500000)
+//		{
+//			isListPage = false;
+//		}
+//		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&special_situation_area>page.width*page.height/2)isListPage = false;
+//		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&text_area>list_area*2)isListPage = false;
+//		
+//		System.out.println("mid_list_area"+mid_list_area);
+//		System.out.println("mid_text_area"+mid_text_area);
 //		System.out.println("text_num"+text_num);
 //		System.out.println("list_num"+list_num);
 ////		strict_src_num;
