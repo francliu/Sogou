@@ -34,6 +34,7 @@ import org.xml.sax.SAXException;
 
 import com.sogou.cm.pa.pagecluster.PageSegmentation;
 
+import scala.collection.mutable.HashTable;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -60,6 +61,7 @@ public class ListBlockExtractor implements ContentHandler {
 	HashSet<String> list_tag_set;
 	HashSet<Element> list_blocks;
 	HashSet<Element> text_blocks;
+	HashMap<Long,Long> text_Hash_blocks;
 	HtmlPage page;
 	Element red;
 	Element green;
@@ -86,6 +88,13 @@ public class ListBlockExtractor implements ContentHandler {
 	boolean nextPage;
 	boolean album;
 	boolean position;
+	boolean experience;
+	boolean purchase;
+	boolean introduction;
+	boolean steps; //方法/步骤
+	boolean position_intro;//职位描述 招聘人数 职位名称
+	boolean position_name;
+	boolean position_numbers;
 	public ListBlockExtractor() {
 		isListPage = false;
 		is_video = null;
@@ -108,6 +117,13 @@ public class ListBlockExtractor implements ContentHandler {
 		nextPage = false;
 		album = false;
 		position = false;
+		experience = false;
+		steps = false;
+		purchase = false;
+		introduction = false;
+		position_intro = false;
+		position_name = false;
+		position_numbers = false;
 		path = new LinkedList<Element>();
 		print_path = new LinkedList<PrintElement>();
 		xpath = new StringBuffer();
@@ -121,6 +137,7 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		list_blocks = new HashSet<Element>();
 		text_blocks = new HashSet<Element>();
+		text_Hash_blocks = new HashMap<Long,Long>();
 		page = new HtmlPage();
 		FastVector temp = new FastVector();
 		temp.addElement("true");
@@ -176,6 +193,13 @@ public class ListBlockExtractor implements ContentHandler {
 		nextPage = false;
 		album = false;
 		position = false;
+		experience = false;
+		steps = false;
+		purchase = false;
+		introduction = false;
+		position_intro = false;
+		position_name = false;
+		position_numbers = false;
 		path.clear();
 		print_path.clear();
 		xpath.setLength(0);
@@ -188,6 +212,7 @@ public class ListBlockExtractor implements ContentHandler {
 		is_abnormal_page = false;
 		list_blocks.clear();
 		text_blocks.clear();
+		text_Hash_blocks.clear();
 		page = new HtmlPage();
 		red = null;
 		green = null;
@@ -256,8 +281,7 @@ public class ListBlockExtractor implements ContentHandler {
 					t.pe.is_list = false;
 					roots.is_list = false;
 				}
-//				if(
-//						||t.name.toLowerCase().compareTo("body")==0
+//				if(t.name.toLowerCase().compareTo("body")==0
 //						||t.name.toLowerCase().compareTo("head")==0)
 //				{
 //					t.is_list = false;
@@ -285,7 +309,7 @@ public class ListBlockExtractor implements ContentHandler {
 			green.tobottom = page.height - (green.top+green.height);
 		}
 		traverse_domtree(dom_root); 
-		isListPage();
+		if(!is_stop)isListPage();
 	}
 
 	public void startPrefixMapping(String prefix, String uri) throws SAXException {
@@ -1871,26 +1895,37 @@ public class ListBlockExtractor implements ContentHandler {
 		//列表页的召回率:91|135|0.674074074074074
 		//列表页的准确率:91|127|0.7165354330708661
 
+		if(s.compareTo("经验")==0)experience=true;
+		if(s.contains("步骤"))steps=true;
+		if(experience&&steps)
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("加入购物"))purchase = true;
+		if(s.contains("在线订购")||s.contains("在线购买"))purchase = true;
+		if(s.contains("商品详情")||s.contains("详细介绍"))introduction = true;
+		if(introduction&&purchase)
+		{
+			is_stop=true;
+			return;
+		}
 		if(s.contains("作者"))author = true;
 		if(s.contains("最新章节"))latestArictle = true;
 		if(author&&latestArictle){
 			is_stop=true;
 			return;
 		}
-		if(s.contains("有码无码"))
-		{
-			is_stop=true;
-			return;
-		}
+
 		if(s.contains("会员"))registers = true;
 		if(s.contains("发表于"))theTimeReport = true;
 		if(registers&&(theTimeReport||s.contains("楼主"))){
 			is_stop=true;
 			return;
 		}
-		if(s.contains("腾讯微博")||s.toLowerCase().contains("tencent weibo"))TecentBlog = true;
+		if(s.contains("微博")||s.toLowerCase().contains("tencent weibo"))TecentBlog = true;
 		if(s.contains("分享到"))share = true;
-		if(TecentBlog&&(share||s.contains("作者删除"))){
+		if(TecentBlog&&(share||s.contains("作者删除")||s.contains("不存在"))){
 			is_stop=true;
 			return;
 		}
@@ -1907,7 +1942,6 @@ public class ListBlockExtractor implements ContentHandler {
 			is_stop=true;
 			return;
 		}
-
 		if(s.contains("查看"))check=true;
 		if(s.contains("全部楼层"))showAllfloors=true;
 		if(s.contains("回复"))reply=true;
@@ -1918,7 +1952,26 @@ public class ListBlockExtractor implements ContentHandler {
 		if(s.contains("发布"))publish=true;
 		if(s.contains("来源于"))origin=true;
 		if(s.contains("浏览次数"))readtimes=true;
+		if(s.contains("简介"))introduction = true;
+		if((s.compareTo("正文")==0||s.compareTo("发布日期")==0)&&introduction)
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("有码")&&s.contains("无码"))
+		{
+			is_stop=true;
+			return;
+		}
 		if(publish&&(origin||readtimes))
+		{
+			is_stop=true;
+			return;
+		}
+		if(s.contains("职位描述 "))position_intro = true;
+		if(s.contains("职位名称 "))position_name = true;
+		if(s.contains("招聘人数 "))position_numbers = true;
+		if(position_intro&&position_name&&position_numbers)
 		{
 			is_stop=true;
 			return;
@@ -1931,7 +1984,7 @@ public class ListBlockExtractor implements ContentHandler {
 //			return;
 //		}
 		if(s.contains("您的位置")||s.contains("当前位置")||s.contains("您现在的位置"))position=true;
-		if(position&&(s.contains("上一篇")||s.contains("下一篇")
+		if((position)&&(s.contains("来源")||s.contains("上一篇")||s.contains("下一篇")
 				||s.contains("前一篇")||s.contains("后一篇")
 				||s.contains("下一条")||s.contains("下一条")))
 		{
@@ -1943,22 +1996,6 @@ public class ListBlockExtractor implements ContentHandler {
 			is_stop=true;
 			return;
 		}
-		/**
-		 * 列表页的召回率:97|136|0.7132352941176471
-		 * 列表页的准确率:97|124|0.782258064516129
-		 */
-		if(element.top<300&&element.left<300)
-		{
-			if(s.contains("您现在的位置"))
-			{
-				is_stop=true;
-				return;
-			}
-		}
-		/**
-		 * 列表页的召回率:96|135|0.7111111111111111
-		       列表页的准确率:96|136|0.7058823529411765
-		 */
 //		/**
 //		 * s.contains("当前位置")
 //				||s.contains("职位招聘")
@@ -2107,9 +2144,12 @@ public class ListBlockExtractor implements ContentHandler {
 		int mid_list_area=0;
 		int mid_text_area=0;
 		int mid_other_area=0;
+		int area_equal_max_num=0;
+		int area_equal_max_area=0;
 		for(Element e:text_blocks)
 		{
 //			if(e.in_text)continue;
+//			System.out.println("text:"+e.name);
 			text_area+=e.area;
 			if(!e.in_text&&e.top>400&&e.top<900&&e.left<page.width/2)mid_text_area+=e.area;
 			if((page.height!=0&&page.width!=0)&&(e.top>(page.height*2/3)||(e.in_text&&e.area<160000)||e.left>900||e.area<5000))
@@ -2120,6 +2160,19 @@ public class ListBlockExtractor implements ContentHandler {
 			}
 			else
 			{
+				if(!text_Hash_blocks.containsKey((long)e.area))
+				{
+					text_Hash_blocks.put((long)e.area, (long)1);
+				}
+				else
+				{
+					if(area_equal_max_num<text_Hash_blocks.get((long)e.area)+1)
+					{
+						area_equal_max_num = (int) (text_Hash_blocks.get((long)e.area)+1);
+						area_equal_max_area = e.area;
+					}
+					text_Hash_blocks.put((long)e.area, text_Hash_blocks.get((long)e.area)+1);
+				}
 				text_num++;
 				src_num+=getUrlNum(e);
 				if(e.src!=null)strict_src_num++;
@@ -2141,7 +2194,7 @@ public class ListBlockExtractor implements ContentHandler {
 		}
 		for(Element e:list_blocks)
 		{
-			
+//			System.out.println("list:"+e.name);
 			if(e.in_list)continue;
 			if(e.top>400&&e.top<800&&e.left<page.width/2)mid_list_area+=e.area;
 			list_area+=e.area;
@@ -2297,12 +2350,13 @@ public class ListBlockExtractor implements ContentHandler {
 		if(!isListPage
 				&&Big_List_area<Big_Text_area
 				&&Big_Text_top>Big_List_top
-				&&text_num>=7&&list_num>=3
-				&&((Math.abs(src_num-text_num)<=4&&src_num>=5)||src_num>text_num||src_num>=5)
+				&&text_num>=5&&list_num>=3
+				&&((Math.abs(src_num-text_num)<=4&&src_num>=5)||src_num>text_num||src_num>=5||src_num==0)
 				)
 		{
-//			System.out.println("Listcontaintext2"+Big_Text.area);
-			if((list_num*2<=text_num&&text_num>=10)||(Big_Text_area>Big_List_area*4)
+			System.out.println("Listcontaintext2"+Big_Text.area);
+			if(((list_num*2<=text_num&&text_num>=10)||(Big_Text_area>Big_List_area*4)
+					||(list_num<=text_num&&text_num>=5))
 					&&Big_Text_left<500&&Big_List_left<500
 					&&(Math.abs(Big_Text_left-Big_List_left)<100||Big_List_left==0)
 					&&Big_List_top<page.height/3
@@ -2317,6 +2371,12 @@ public class ListBlockExtractor implements ContentHandler {
 		if(!isListPage&&Big_List_area>50000&&Big_Text_area==0&&list_num<=5)
 		{
 			isListPage=true;
+		}
+		if(!isListPage&&(text_num>=2*list_num||list_num<6)&&Math.abs(Big_List_area-Big_Text_area)<30000)
+		{
+			if(area_equal_max_num>=3&&area_equal_max_area>10000)isListPage=true;
+			if(area_equal_max_num>=4&&area_equal_max_area>5000
+					&&area_equal_max_area<10000)isListPage=true;
 		}
 //		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
 //		{
@@ -2419,10 +2479,10 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 //		int i=244;
-		int i=301;
+		int i=235;
 		int list_num=0;
 		int other_num=0;
-		while(i<=400)
+//		while(i<=400)
 		{
 			String name="t"+i;
 //			String name="t1026";
@@ -2434,7 +2494,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(!file.exists())
 			{
 				i++;
-				continue;
+//				continue;
 			}
 			
 			BufferedReader reader = new BufferedReader(new FileReader(file));
