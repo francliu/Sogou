@@ -1,0 +1,56 @@
+@relation listblock
+@attribute is_stop {true, false}
+@attribute author {true, false}
+@attribute latestArictle {true, false}
+@attribute showAllfloors {true, false}
+@attribute registers {true, false}
+@attribute theTimeReport {true, false}
+@attribute TecentBlog {true, false}
+@attribute share {true, false}
+@attribute haveSolvedquestion {true, false}
+@attribute answers {true, false}
+@attribute check {true, false}
+@attribute reply {true, false}
+@attribute publish {true, false}
+@attribute origin {true, false}
+@attribute readtimes {true, false}
+@attribute novel {true, false}
+@attribute nextPage {true, false}
+@attribute album {true, false}
+@attribute position {true, false}
+@attribute experience {true, false}
+@attribute purchase {true, false}
+@attribute introduction {true, false}
+@attribute steps {true, false}
+@attribute position_intro {true, false}
+@attribute position_name {true, false}
+@attribute position_numbers {true, false}
+@attribute Big_Text_area numeric
+@attribute Big_Text_left numeric
+@attribute Big_Text_top numeric
+@attribute frist_Text_area numeric
+@attribute frist_Text_top numeric
+@attribute frist_Text_left numeric
+@attribute Big_List_area numeric
+@attribute Big_List_left numeric
+@attribute Big_List_top numeric
+@attribute frist_List_area numeric
+@attribute frist_List_top numeric
+@attribute frist_List_left numeric
+@attribute list_num numeric
+@attribute text_num numeric
+@attribute special_situation_area numeric
+@attribute list_area numeric
+@attribute text_area numeric
+@attribute other_area numeric
+@attribute src_num numeric
+@attribute strict_src_num numeric
+@attribute mid_text_num numeric
+@attribute mid_list_area numeric
+@attribute mid_text_area numeric
+@attribute mid_other_area numeric
+@attribute area_equal_max_num numeric
+@attribute area_equal_max_area numeric
+@attribute is_sub_title {true, false}
+@attribute is_list {0, 1}
+@data

@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,7 +37,6 @@ import org.xml.sax.SAXException;
 
 import com.sogou.cm.pa.pagecluster.PageSegmentation;
 
-import scala.collection.mutable.HashTable;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -68,6 +70,8 @@ public class ListBlockExtractor implements ContentHandler {
 	Element is_video;
 	Instances data_set;
 	Classifier cls;
+	int is_list_page;
+	boolean is_sub_title;
 	boolean isListPage;
 	boolean is_stop;
 	boolean author;
@@ -96,6 +100,9 @@ public class ListBlockExtractor implements ContentHandler {
 	boolean position_name;
 	boolean position_numbers;
 	public ListBlockExtractor() {
+		is_list_page=0;
+		is_sub_title = false;
+
 		isListPage = false;
 		is_video = null;
 		is_stop = false;
@@ -161,17 +168,19 @@ public class ListBlockExtractor implements ContentHandler {
 		
 		data_set = new Instances("dataset", attributes, 0);
 		data_set.setClassIndex(data_set.numAttributes() - 1);
-		String model_path = "list_block_cv.model";
+		String model_path = "D:\\Code\\sogouCode\\Sogou\\list_block_cv.model";
 		try {
-			cls =  (Classifier) SerializationHelper.read(model_path);
-		}  catch (Exception e) {
+			cls = (Classifier) SerializationHelper.read(model_path);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			cls = null;
 			e.printStackTrace();
 		}
+
 	}
 	
 	public void clear() {
+		is_list_page=0;
+		is_sub_title = false;
 		isListPage = false;
 		is_video = null;
 		is_stop = false;
@@ -309,7 +318,19 @@ public class ListBlockExtractor implements ContentHandler {
 			green.tobottom = page.height - (green.top+green.height);
 		}
 		traverse_domtree(dom_root); 
-		if(!is_stop)isListPage();
+//		if(!is_stop)
+			try {
+				isListPage();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	public void startPrefixMapping(String prefix, String uri) throws SAXException {
@@ -419,7 +440,10 @@ public class ListBlockExtractor implements ContentHandler {
 	}
 	
 	public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
-		if (is_abnormal_page||is_stop) {
+//		if (is_abnormal_page||is_stop) {
+//			return;
+//		}
+		if (is_abnormal_page) {
 			return;
 		}
 		if (xpath.length() > 2000) {
@@ -1772,7 +1796,10 @@ public class ListBlockExtractor implements ContentHandler {
 	
 
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if (is_abnormal_page||is_stop) {
+//		if (is_abnormal_page||is_stop) {
+//			return;
+//		}
+		if (is_abnormal_page) {
 			return;
 		}
 		
@@ -1875,10 +1902,12 @@ public class ListBlockExtractor implements ContentHandler {
 
 	
 	public void characters(char[] ch, int start, int length) throws SAXException {
-		if (is_abnormal_page||is_stop) {
+//		if (is_abnormal_page||is_stop) {
+//			return;
+//		}
+		if (is_abnormal_page) {
 			return;
 		}
-
 		Element element = path.peekLast();
 		
 		String s = String.valueOf(ch, start, length);
@@ -1900,7 +1929,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if(experience&&steps)
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("加入购物"))purchase = true;
 		if(s.contains("在线订购")||s.contains("在线购买"))purchase = true;
@@ -1908,46 +1937,46 @@ public class ListBlockExtractor implements ContentHandler {
 		if(introduction&&purchase)
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("作者"))author = true;
 		if(s.contains("最新章节"))latestArictle = true;
 		if(author&&latestArictle){
 			is_stop=true;
-			return;
+//			return;
 		}
 
 		if(s.contains("会员"))registers = true;
 		if(s.contains("发表于"))theTimeReport = true;
 		if(registers&&(theTimeReport||s.contains("楼主"))){
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("微博")||s.toLowerCase().contains("tencent weibo"))TecentBlog = true;
 		if(s.contains("分享到"))share = true;
 		if(TecentBlog&&(share||s.contains("作者删除")||s.contains("不存在"))){
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("已解决问题"))haveSolvedquestion = true;
 		if(s.contains("满意答案"))answers = true;
 		if(haveSolvedquestion||answers)
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("我的相册"))album=true;
 		if(album&&(s.contains("上一张")||s.contains("下一张")))
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("查看"))check=true;
 		if(s.contains("全部楼层"))showAllfloors=true;
 		if(s.contains("回复"))reply=true;
 		if(check&&reply||showAllfloors){
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("发布"))publish=true;
 		if(s.contains("来源于"))origin=true;
@@ -1956,17 +1985,17 @@ public class ListBlockExtractor implements ContentHandler {
 		if((s.compareTo("正文")==0||s.compareTo("发布日期")==0)&&introduction)
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("有码")&&s.contains("无码"))
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(publish&&(origin||readtimes))
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("职位描述 "))position_intro = true;
 		if(s.contains("职位名称 "))position_name = true;
@@ -1974,7 +2003,7 @@ public class ListBlockExtractor implements ContentHandler {
 		if(position_intro&&position_name&&position_numbers)
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 //		if(s.contains("小说"))novel=true;
 //		if(s.contains("下一页"))nextPage=true;
@@ -1989,12 +2018,12 @@ public class ListBlockExtractor implements ContentHandler {
 				||s.contains("下一条")||s.contains("下一条")))
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 		if(s.contains("你现在正在浏览"))
 		{
 			is_stop=true;
-			return;
+//			return;
 		}
 //		/**
 //		 * s.contains("当前位置")
@@ -2099,7 +2128,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(c.children.size()>0)filter(c);
 		}
 	}
-	public void isListPage(){
+	public void isListPage() throws IOException{
 		if(is_abnormal_page)
 		{
 			return;
@@ -2470,6 +2499,23 @@ public class ListBlockExtractor implements ContentHandler {
 //		System.out.println("Big_Text_left"+Big_Text_left);
 //		System.out.println("Big_List_top"+Big_List_top);
 //		System.out.println("Big_Text_top"+Big_Text_top);
+		BufferedWriter writerFeather = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("list_blockTrain.arff"),true), "utf8"));
+//		
+		String out = is_stop+","+author+","+latestArictle+","+showAllfloors+","+registers
+				+","+theTimeReport+","+TecentBlog+","+share+","+haveSolvedquestion
+				+","+answers+","+check+","+reply+","+publish+","+origin+","+readtimes
+				+","+novel+","+nextPage+","+album+","+position+","+experience+","+purchase
+				+","+introduction+","+steps+","+position_intro+","+position_name+","+position_numbers
+				+","+Big_Text_area+","+Big_Text_left+","+Big_Text_top+","+frist_Text_area+","+frist_Text_top
+				+","+frist_Text_left+","+Big_List_area+","+Big_List_left+","+Big_List_top+","+frist_List_area
+				+","+frist_List_top+","+frist_List_left+","+list_num+","+text_num+","+special_situation_area
+				+","+list_area+","+text_area+","+other_area+","+src_num+","+strict_src_num
+				+","+mid_text_num+","+mid_list_area+","+mid_text_area+","+mid_other_area
+				+","+area_equal_max_num+","+area_equal_max_area+","+is_sub_title+","+is_list_page+"\n";
+		writerFeather.write(out);
+		writerFeather.flush();
+		writerFeather.close();
+//		System.out.println("---------------sss"+isListPage);
 		return;
 	}
 	@SuppressWarnings("resource")
@@ -2479,14 +2525,15 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 //		int i=244;
-		int i=235;
+		int i=1006;
 		int list_num=0;
 		int other_num=0;
-//		while(i<=400)
+		ListFeatherExtractor.InitListFeathers();
+		while(i<=1100)
 		{
 			String name="t"+i;
 //			String name="t1026";
-			File file = new File("D:\\JavaWorkplace\\sogou\\530ListPage\\"+name+".html");
+			File file = new File("D:\\Code\\sogouCode\\Sogou\\519Pages\\"+name+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\LastNewPage\\t497.html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t"+num+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t1408.html");
@@ -2494,7 +2541,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(!file.exists())
 			{
 				i++;
-//				continue;
+				continue;
 			}
 			
 			BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -2507,11 +2554,13 @@ public class ListBlockExtractor implements ContentHandler {
 				tempString=null;
 			}
 			try {
+//				System.out.print(s);
 		//		htmlContentHandler.setUrl("http://www.iqiyi.com/yinyue/20121214/10453bddc18b141b.html");
 				parser.parse(new InputSource(new StringReader(s)));
 				if (htmlContentHandler.red != null) {
 					System.out.println(htmlContentHandler.red.has_list);
 				}
+				System.out.println(i+":"+htmlContentHandler.isListPage);
 				if(htmlContentHandler.isListPage)
 				{
 					System.out.println(i+"|"+htmlContentHandler.isListPage);

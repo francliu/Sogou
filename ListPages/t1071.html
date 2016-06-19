@@ -1,0 +1,336 @@
+<html >
+<body >
+null</body>
+<head >
+<base href="http://www.ybrc.gov.cn/recruit/companyInfo_2400_11253.html" >
+</base>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" >
+</meta>
+</head>
+<html >
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" >
+</meta>
+<title >
+单位招聘列表</title>
+<link rel="Shortcut Icon" href="/favicon.ico" >
+</link>
+<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" >
+</link>
+<link href="/resource/public/css/indextop.css" rel="stylesheet" type="text/css" >
+</link>
+<link href="/resource/public/css/style.css" rel="stylesheet" type="text/css" >
+</link>
+<link href="/resource/module/recruitment/css/special_zph.css" type="text/css" rel="stylesheet" >
+</link>
+<link href="/resource/module/recruitment/css/unit_zp.css" type="text/css" rel="stylesheet" >
+</link>
+<script type="text/javascript" src="/resource/public/js/input.js" >
+</script>
+<style >
+  #nav_1{color:#fff; font-weight:bold; background:url(/resource/public/images/Ahover.jpg) no-repeat top center; display:block; cursor:hand; text-decoration:none;};</style>
+</head>
+<body >
+<script type="text/javascript" src="/resource/public/js/jquery.js" >
+</script>
+<script type="text/javascript" >
+function checkUserName1(){  var userName1 = $("#userName1").val();  if(null == userName1 || "" == userName1){    alert("用户名不能为空");    return false;  }else {    return true;  } }function checkPassword1(){  var password1 = $("#password1").val();  if(null == password1 || "" == password1){    alert("密码不能为空");    return false;  }else if(password1.length<6 || password1.length>18){    alert("密码格式错误");    return false;  }else {    return true;  }}function changeLoginType(value){  $("#loginType").val(value);}function topLogin(){  if(checkUserName1() && checkPassword1()){    document.getElementById("loginForm").submit();  }}function AddFavorite(sURL,sTitle){  sURL - encodeURI(sURL);  try{    window.external.addFavorite(sURL,sTitle);  }catch(e){    try{      window.sidebar.addPanel(sTitle,sURL,"");    }catch(e){      alert("加入收藏失败，请使用Ctrl+D进行添加，或手动在浏览器里进行设置。");    }  }}function searchNews(){  var searchContent1 = $("#searchContent1").val();  if("输入关键字搜索你需要的内容" == searchContent1){    alert("请输入搜索内容");    $("#searchContent1").val("");  }else if("" == searchContent1 || null == searchContent1){    alert("请输入搜索内容");  }else{    document.getElementById("searchForm").submit();  }}function logOut(){	var logMember = "false";	var logCompany = "false";	if("true"==logMember){		window.location="/member/member.do?method=loginOut";	}	if("true"==logCompany){		window.location="/company/center.do?method=logout";	}}--></script>
+<div class="top" >
+  <form enctype="application/x-www-form-urlencoded" method="post" id="loginForm" action="/user.do?method=login" >
+  <input type="hidden" id="loginType" name="loginType" value="1" >
+</input>
+  <ul class="TopLeft" >
+<li class="Login01" >
+用户名</li>
+<li class="Login02" >
+<input type="text" id="userName1" name="userName" >
+</input>
+</li>
+<li class="Login01" >
+密码</li>
+<li class="Login02" >
+<input type="password" id="password1" name="password" >
+</input>
+</li>
+<li class="Login03" >
+<input checked="true" type="radio" name="loginTypeRadio" onclick="changeLoginType(1)" value="" >
+</input>
+</li>
+<li class="Login01" >
+个人</li>
+<li class="Login03" >
+<input type="radio" name="loginTypeRadio" onclick="changeLoginType(2)" value="" >
+</input>
+</li>
+<li class="Login01" >
+企业</li>
+<li class="Login04" >
+<a shape="rect" href="javascript:topLogin();" >
+<img src="/resource/public/images/input_01.jpg" >
+</img>
+</a>
+</li>
+</ul>
+  </form>
+  <ul class="TopRight" style="border:8px solid yellow;" >
+<li style="border:8px solid yellow;" >
+      <span class="SpanMar03" >
+<a shape="rect" href="javascript:void(0);" onclick="AddFavorite(window.location,document.title)" >
+加入收藏</a>
+</span>
+      <span class="SpanMar04" >
+<img src="/resource/public/images/ioc_03.jpg" >
+</img>
+</span>
+      <span class="SpanMar03" >
+<a shape="rect" href="/register.html" target="_blank" >
+注册</a>
+</span>
+      <span class="SpanMar04" >
+<img src="/resource/public/images/ioc_03.jpg" >
+</img>
+</span>
+      <span class="SpanMar02" >
+<a shape="rect" href="/" target="_blank" >
+返回首页</a>
+</span>
+      <span class="SpanMar01" >
+<img src="/resource/public/images/ipc_01.jpg" >
+</img>
+</span>
+    </li>
+</ul>
+</div>
+<div class="Logo" >
+	<ul class="LogoLeft" >
+</ul>
+<a shape="rect" href="/" target="_blank" >
+<img src="/resource/public/images/logo.jpg" >
+</img>
+</a>
+  <ul class="LogoRight" >
+</ul>
+<a shape="rect" href="http://www.yibin.gov.cn/ybszjj/" title="" target="_blank" >
+<img src="http://www.ybrc.gov.cn:8372/img/rAd/9cd3171416449684.jpg" width="786px;" height="80px;" >
+</img>
+</a>
+		      </div>
+<div class="Nav" >
+  <div class="Nav_Left" >
+<img src="/resource/public/images/Nav_left.jpg" >
+</img>
+</div>
+  <div class="Nav_Center" style="border:8px solid yellow;" >
+    <div class="Nav_CenterTop" style="border:8px solid yellow;" >
+      <ul style="border:8px solid yellow;" >
+<li class="Nav_CenterTop01" >
+<a shape="rect" href="/" >
+首  页</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_1" >
+<a shape="rect" href="/recruit/index.html" >
+招聘求职</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_2" >
+<a shape="rect" href="/proxy/index.html" >
+档案代理</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_3" >
+<a shape="rect" href="/dispatch/index.html" >
+人才派遣</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_4" >
+<a shape="rect" href="/cyjy/index.html" >
+创业就业</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_5" >
+<a shape="rect" href="/exam/index" >
+考试服务</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_6" >
+<a shape="rect" href="/graduate/index.html" >
+毕业生服务</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_7" >
+<a shape="rect" href="/governmentAffair/index.html" >
+政务大厅</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_8" >
+<a shape="rect" href="/trainings/index.html" >
+人才培训</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_9" >
+<a shape="rect" href="/party/index.html" >
+网上党支部</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_10" >
+<a shape="rect" href="/marketStyle/index.html" >
+市场风采</a>
+</li>
+<li >
+<img src="/resource/public/images/Nav_middle.jpg" >
+</img>
+</li>
+<li class="Nav_CenterTop01" id="nav_11" >
+<a shape="rect" href="/buybookIndex.html" >
+资料购买</a>
+</li>
+</ul>
+    </div>
+    <div class="Nav_CenterBottom" style="border:8px solid yellow;" >
+      <ul style="border:8px solid yellow;" >
+<li class="Nav_CenterBottom_Mar01" >
+	        <form enctype="application/x-www-form-urlencoded" method="get" id="searchForm" action="/news.do" >
+	          <input type="hidden" name="method" value="searchNews" >
+</input>
+  	        <input type="hidden" id="searchType" name="searchType" value="searchAll" >
+</input>
+	          <input type="text" id="searchContent1" name="searchContent" value="输入关键字搜索你需要的内容" onclick="Focus(this);" onblur="Blur(this);" >
+</input>
+          </form>
+	      </li>
+<li class="Nav_CenterBottom_Mar02" >
+<a shape="rect" href="javascript:searchNews();" >
+<img src="/resource/public/images/input_03.jpg" >
+</img>
+</a>
+</li>
+<li class="Nav_CenterBottom_Mar04" style="overflow:hidden;height:25px;" >
+ 	      		      	<a shape="rect" href="http://rjj.ybrc.gov.cn:8080/Article/ShowArticle.asp?ArticleID=387" target="_blank" title="宜宾市人就局关于做好失业保险支持企业稳定岗位补贴审核工作的通知" style="<str:replace method='isRed' styleClass='1'/>" >
+<font size="3" weight="20" color="red" style="border:8px solid #FF34B3;" >
+<b >
+宜宾市人就局关于做好失业保险支持企业稳定岗位补贴审核工作的通知</b>
+</font>
+</a>
+	          	</li>
+</ul>
+    </div>
+  </div>
+  <div class="Nav_Left" >
+<img src="/resource/public/images/Nav_right.jpg" >
+</img>
+</div>
+</div>
+<div class="weizhi" >
+您现在的位置：<a shape="rect" href="/" >
+首页</a>
+→<a shape="rect" href="/recruit/index.html" >
+招聘求职</a>
+</div>
+<div class="unit_div" style="border:8px solid #FF34B3;" >
+  <div class="img_gg" >
+    </div>
+  <h1 class="h1_unitname" >
+四川豪世佳肆零零信息技术有限公司</h1>
+  <div class="unit_jianjie_tit" >
+<span >
+公司简介</span>
+</div>
+  <p class="unit_introduce" >
+    <span style="font-size:14px;" >
+    豪世佳信息技术有限公司成立于2008年，是国内早期为企业信息化建设提供优质互联网应用通讯网络服务的公司。专业提供商务集团彩铃、企业400电话，短信群发、信用卡办理等业务，其业务涉及企业信息化方方面面。我公司铸就了一批素质高，经验丰富的管理人员和销售队伍，作业范围涵盖了整个通讯网络服务链，具有较强的服务能力。公司一直以来都视人才为公司最宝贵的财富，为录用的人员提供广阔的发展空间、完善的薪酬福利保障和良好的培训与发展机会。现因公司拓展需要特面向社会招聘以下职位：<br clear="none" >
+</br>
+</span>
+</p>
+ <div class="unit_jianjie_tit m_top" >
+<span >
+招聘岗位</span>
+</div>
+ <div class="unit_jianjie_tit lxfs_name" >
+<span style="color: #000000;" >
+<b >
+联系方式</b>
+</span>
+</div>
+  <p class="lxfs" >
+<b >
+联系人：</b>
+马经理</p>
+  <p class="lxfs" >
+<b >
+联系电话：</b>
+18090966650--3668686</p>
+  <p class="lxfs" >
+<b >
+单位网址：</b>
+sc100860.com</p>
+  <p class="lxfs" >
+<b >
+单位地址：</b>
+下江北太阳岛9栋806 </p>
+  <p class="lxfs" style="height:auto;" >
+<b >
+备注：</b>
+以上职位一经录用工作满2个月以上，公司购买商业保险，享受年终奖，均享受公司专业正规培训！地址：下江北太阳岛9栋806 联系电话18090966650--3668686  公交乘车路线：（17路16路直到 太阳岛下车向前走100米）5路、19路、24路</p>
+	</div>
+<div class="Bottom" >
+  <ul >
+<li >
+<span >
+版权声明</span>
+ | <a shape="rect" href="http://rjj.ybrc.gov.cn:8080/" target="_blank" >
+<font color="red" >
+宜宾市人才服务和就业促进局</font>
+</a>
+ | <a shape="rect" href="mailto:ybrcw@tom.com" target="_blank" >
+联系我们</a>
+ | <a shape="rect" href="/links.html" >
+友情链接</a>
+ | <font style="color:#333;" >
+网站点击量:<font style="color:red;" >
+276039945</font>
+</font>
+</li>
+<li style="border:8px solid #FF34B3;" >
+<span >
+地址:宜宾市商业街53号（大观楼旁)  邮编:644000  ICP证:蜀ICP备05003047号</span>
+</li>
+<li style="border:8px solid #FF34B3;" >
+<span >
+版权所有:四川川南人力资源市场※宜宾市人力资源服务中心 严禁转载</span>
+</li>
+</ul>
+</div>
+</body>
+</html>
+</html>
