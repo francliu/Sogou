@@ -255,10 +255,10 @@ public class ListBlockExtractor implements ContentHandler {
 			return;
 		}
 		if (e.is_list) {
-			Element t = e;
-			PrintElement roots = root;
-			t.tobottom = page.height-(t.top+t.height);
-			double[] att_vals = {boolean2Int(t.is_displaynone),Math.atan(t.top) , Math.atan(t.left), Math.atan(t.height), Math.atan(t.width), Math.atan(t.area), Math.atan(t.text_len), Math.atan(t.own_text_len), Math.atan(t.anchor_len), Math.atan(t.anchor_num), Math.atan((double)t.anchor_len/(t.text_len-t.anchor_len)), Math.atan(t.img_num), Math.atan(t.child_num), Math.atan(t.fake_child_num), Math.atan(t.input_area), Math.atan(t.area_list), Math.atan(t.area_other), Math.atan(t.list_num1), Math.atan(t.strict_list_num1), Math.atan(t.indiffent_child_num1), Math.atan(t.list_num2), Math.atan(t.strict_list_num2), Math.atan(t.indiffent_child_num2), Math.atan(t.list_num3), Math.atan(t.indiffent_child_num3), Math.atan(t.big_list_num), Math.atan(t.biggest_child_area), Math.atan(t.biggest_img_area), Math.atan(t.biggest_img_width), Math.atan(t.most_img_num), Math.atan(t.child_arrange_style), Math.atan(t.first_second_child_ratio), Math.atan(t.tobottom), Math.atan(t.longest_own_text_len), Math.atan(t.child_height2width), Math.atan(t.tall_child_num), Math.atan((double)t.friend_link_area/(t.area+1)), Math.atan((double)t.full_list_area/(t.area+1)), Math.atan(t.text_len-t.full_list_len), Math.atan(t.text_len-t.anchor_len), boolean2Int(t.has_intro), boolean2Int(t.has_sub_title), boolean2Int(t.is_sub_title), boolean2Int(t.has_merged), boolean2Int(t.is_bold), boolean2Int(t.is_time), boolean2Int(t.list_of_subtitle), boolean2Int(t.list_of_keyword), boolean2Int(t.has_repeat_sb_structure), boolean2Int(t.has_other_block), boolean2Int(t.child_is_small), boolean2Int(t.has_one_child), 1};
+//			Element t = e;
+//			PrintElement roots = root;
+//			t.tobottom = page.height-(t.top+t.height);
+//			double[] att_vals = {boolean2Int(t.is_displaynone),Math.atan(t.top) , Math.atan(t.left), Math.atan(t.height), Math.atan(t.width), Math.atan(t.area), Math.atan(t.text_len), Math.atan(t.own_text_len), Math.atan(t.anchor_len), Math.atan(t.anchor_num), Math.atan((double)t.anchor_len/(t.text_len-t.anchor_len)), Math.atan(t.img_num), Math.atan(t.child_num), Math.atan(t.fake_child_num), Math.atan(t.input_area), Math.atan(t.area_list), Math.atan(t.area_other), Math.atan(t.list_num1), Math.atan(t.strict_list_num1), Math.atan(t.indiffent_child_num1), Math.atan(t.list_num2), Math.atan(t.strict_list_num2), Math.atan(t.indiffent_child_num2), Math.atan(t.list_num3), Math.atan(t.indiffent_child_num3), Math.atan(t.big_list_num), Math.atan(t.biggest_child_area), Math.atan(t.biggest_img_area), Math.atan(t.biggest_img_width), Math.atan(t.most_img_num), Math.atan(t.child_arrange_style), Math.atan(t.first_second_child_ratio), Math.atan(t.tobottom), Math.atan(t.longest_own_text_len), Math.atan(t.child_height2width), Math.atan(t.tall_child_num), Math.atan((double)t.friend_link_area/(t.area+1)), Math.atan((double)t.full_list_area/(t.area+1)), Math.atan(t.text_len-t.full_list_len), Math.atan(t.text_len-t.anchor_len), boolean2Int(t.has_intro), boolean2Int(t.has_sub_title), boolean2Int(t.is_sub_title), boolean2Int(t.has_merged), boolean2Int(t.is_bold), boolean2Int(t.is_time), boolean2Int(t.list_of_subtitle), boolean2Int(t.list_of_keyword), boolean2Int(t.has_repeat_sb_structure), boolean2Int(t.has_other_block), boolean2Int(t.child_is_small), boolean2Int(t.has_one_child), 1};
 		/*
 		if (t.name.equals("div") && t.class_attr.equals("goodsList_index clearfix") && t.top == 188) {
 			for (double d: att_vals) {
@@ -269,27 +269,27 @@ public class ListBlockExtractor implements ContentHandler {
 		*/
 			//	System.out.println();
 			//	System.out.println(att_vals.length);
-			Instance inst = new Instance(1.0, att_vals);
-			data_set.delete();
-			data_set.add(inst);
+//			Instance inst = new Instance(1.0, att_vals);
+//			data_set.delete();
+//			data_set.add(inst);
 		//	System.out.println(data_set.numInstances());
 			try {
-				double result = cls.classifyInstance(data_set.instance(0));
+//				double result = cls.classifyInstance(data_set.instance(0));
 				/*
 				if (t.name.equals("ul") && t.top == 1816 && t.width == 240 && t.left == 972) {
 					System.out.println("asdf: " + result);
 				}
 				*/
-				if (Math.abs(result-1.0)<0.01&&t.name.toLowerCase().compareTo("html")!=0) {
-					t.is_list = true;
-					t.pe.is_list = true;
-					roots.is_list = true;
-					
-				} else {
-					t.is_list = false;
-					t.pe.is_list = false;
-					roots.is_list = false;
-				}
+//				if (Math.abs(result-1.0)<0.01&&t.name.toLowerCase().compareTo("html")!=0) {
+//					t.is_list = true;
+//					t.pe.is_list = true;
+//					roots.is_list = true;
+//					
+//				} else {
+//					t.is_list = false;
+//					t.pe.is_list = false;
+//					roots.is_list = false;
+//				}
 //				if(t.name.toLowerCase().compareTo("body")==0
 //						||t.name.toLowerCase().compareTo("head")==0)
 //				{
@@ -297,7 +297,7 @@ public class ListBlockExtractor implements ContentHandler {
 //					t.pe.is_list = false;
 //					roots.is_list = false;
 //				}
-				if(t.is_list)list_blocks.add(t);
+				list_blocks.add(e);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1342,12 +1342,50 @@ public class ListBlockExtractor implements ContentHandler {
 		isListExtend(e);
 	}
 
+	public boolean IsImgOrSrc(Element e){
+		
+		boolean flag = false;
+		for(Element c:e.children)
+		{
+			if(c.name.toLowerCase().compareTo("img")==0
+					||c.name.toLowerCase().compareTo("a")==0)
+			{
+				return true;
+			}
+			else
+			{
+				flag = IsImgOrSrc(c);
+			}
+		}
+		return flag;
+	}
 	public void isListExtend(Element e)
 	{
 		int list_num=0;
 		int list_area=0;
 		int other_num=0;
 		int other_area=0;
+		if(e.name.toLowerCase().compareTo("li")==0
+				||e.name.toLowerCase().compareTo("dl")==0||
+				e.name.toLowerCase().compareTo("td")==0)
+		{
+			int ImgOrSrcNum=0;
+			boolean flag=false;
+			for(Element c:e.children)
+			{
+				if(c.name.toLowerCase().compareTo("img")==0
+						||c.name.toLowerCase().compareTo("a")==0)
+				{
+					ImgOrSrcNum++;
+				}
+				else
+				{
+					flag = IsImgOrSrc(c);
+					if(flag)ImgOrSrcNum++;
+				}
+			}
+			if(ImgOrSrcNum>=1)e.is_list=true;
+		}
 		if (e.is_list && e.child_num > 2) {
 			for (int i = 1; i < e.child_num; i++) {
 				Element child = e.children.get(i);
@@ -2231,10 +2269,16 @@ public class ListBlockExtractor implements ContentHandler {
 			{
 				System.out.println(e.name);
 			}
+			
 			if((page.height!=0&&page.width!=0)
-					&&(e.top>page.height/2||e.left>700||e.area<5000||e.width+e.left<page.width/3))
+					&&(e.top>page.height/2||e.left>700||e.width+e.left<page.width/3))
 			{
 //				System.out.println("1e"+e.top+"|"+page.height);
+				continue;
+			}
+			if(e.area<5000)
+			{
+				list_num++;
 				continue;
 			}
 			list_num++;
@@ -2407,6 +2451,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(area_equal_max_num>=4&&area_equal_max_area>5000
 					&&area_equal_max_area<10000)isListPage=true;
 		}
+		if(text_num>=10&&Big_Text_area<100000)isListPage=true;
 //		if(Big_List_area>Big_Text_area&&Big_Text_area>10000)
 //		{
 //			Element e = IsHasText(Big_list);
@@ -2480,24 +2525,24 @@ public class ListBlockExtractor implements ContentHandler {
 //		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&special_situation_area>page.width*page.height/2)isListPage = false;
 //		if(!text_bigger_list&&(text_num<=5||Big_Text_area>90000)&&text_area>list_area*2)isListPage = false;
 //		
-//		System.out.println("mid_list_area"+mid_list_area);
-//		System.out.println("mid_text_area"+mid_text_area);
-//		System.out.println("text_num"+text_num);
-//		System.out.println("list_num"+list_num);
-////		strict_src_num;
-////		mid_text_num;
-//		System.out.println("src_num"+src_num);
-//		System.out.println("mid_text_num"+mid_text_num);
-//		System.out.println("strict_src_num"+strict_src_num);
-//		System.out.println("strict_src_num"+strict_src_num);
-//		System.out.println("Big_List_area"+Big_List_area);
-//		System.out.println("Big_Text_area"+Big_Text_area);
-////		System.out.println("Big_Text_width"+Big_Text.width);
-//		System.out.println("page_width"+page.width);
-//		System.out.println("page_height"+page.height);
-//		System.out.println("Big_List_left"+Big_List_left);
-//		System.out.println("Big_Text_left"+Big_Text_left);
-//		System.out.println("Big_List_top"+Big_List_top);
+		System.out.println("mid_list_area"+mid_list_area);
+		System.out.println("mid_text_area"+mid_text_area);
+		System.out.println("text_num"+text_num);
+		System.out.println("list_num"+list_num);
+//		strict_src_num;
+//		mid_text_num;
+		System.out.println("src_num"+src_num);
+		System.out.println("mid_text_num"+mid_text_num);
+		System.out.println("strict_src_num"+strict_src_num);
+		System.out.println("strict_src_num"+strict_src_num);
+		System.out.println("Big_List_area"+Big_List_area);
+		System.out.println("Big_Text_area"+Big_Text_area);
+//		System.out.println("Big_Text_width"+Big_Text.width);
+		System.out.println("page_width"+page.width);
+		System.out.println("page_height"+page.height);
+		System.out.println("Big_List_left"+Big_List_left);
+		System.out.println("Big_Text_left"+Big_Text_left);
+		System.out.println("Big_List_top"+Big_List_top);
 //		System.out.println("Big_Text_top"+Big_Text_top);
 		BufferedWriter writerFeather = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("list_blockTrain.arff"),true), "utf8"));
 //		
@@ -2525,11 +2570,11 @@ public class ListBlockExtractor implements ContentHandler {
 		Parser					parser					= new Parser();
 		parser.setContentHandler(htmlContentHandler);
 //		int i=244;
-		int i=1006;
+		int i=1041;
 		int list_num=0;
 		int other_num=0;
 		ListFeatherExtractor.InitListFeathers();
-		while(i<=1100)
+//		while(i<=1100)
 		{
 			String name="t"+i;
 //			String name="t1026";
@@ -2541,7 +2586,7 @@ public class ListBlockExtractor implements ContentHandler {
 			if(!file.exists())
 			{
 				i++;
-				continue;
+//				continue;
 			}
 			
 			BufferedReader reader = new BufferedReader(new FileReader(file));
