@@ -6,17 +6,21 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/chardet.jar"/>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/cpdetector_1.0.10.jar"/>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/sac-base-1.0-20151130.091310-1.jar"/>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/sac-selector-1.0-20151026.063857-1.jar"/>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/tagsoup-1.2.1.jar"/>
-	<classpathentry kind="lib" path="D:/Code/sogouCode/Sogou/lib/weka-stable-3.6.10.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hadoop"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/chardet.jar"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/cpdetector_1.0.10.jar"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/sac-base-1.0-20151130.091310-1.jar"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/sac-selector-1.0-20151026.063857-1.jar"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/tagsoup-1.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/JavaWorkplace/Sogou/lib/weka-stable-3.6.10.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/common"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hdfs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mapreduce"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tagsoup"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tools"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/weka"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/weka3.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/yarn"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

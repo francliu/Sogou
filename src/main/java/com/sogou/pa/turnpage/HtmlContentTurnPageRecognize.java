@@ -28,7 +28,7 @@ public class HtmlContentTurnPageRecognize {
 		//加载url读取url翻页标志
 		
 //		File urlfile = new File("/home/liujianfei/python/huhu/src/haha/tagsoup/TurnPage1000.txt");
-		File urlfile = new File("D:\\JavaWorkplace\\sogou\\data\\Before518Page");
+		File urlfile = new File("D:\\JavaWorkplace\\sogou\\Before518Page");
 //		File urlfile = new File("D:\\JavaWorkplace\\sogou\\data\\Before518Page");
 //		File urlfile = new File("D:\\JavaWorkplace\\sogou\\data\\NewTurnPage1000.txt");
 //		File urlfile = new File("D:\\JavaWorkplace\\sogou\\data\\TurnPage1000.txt");
@@ -73,7 +73,7 @@ public class HtmlContentTurnPageRecognize {
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\src\\haha\\ThirdTurnPageold.txt");
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\src\\haha\\FristTurnPage.txt");
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\src\\haha\\SecondTurnPage.txt");
-		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\src\\haha\\519IsTurnPageLast.txt");
+		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\519IsTurnPageLast.txt");
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\src\\haha\\519IsTurnPage.txt");
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\data\\Feathers\\OldFeathers.csv");
 //		File RandomFile = new File("D:\\JavaWorkplace\\sogou\\data\\Feathers\\NewFeathers.csv");
@@ -89,12 +89,12 @@ public class HtmlContentTurnPageRecognize {
 		long total_parse_time=0;
 		long PageCorrectNum=0;
 		num=1;
-		while(num<=6500)
+//		while(num<=6500)
 		{
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\ThirdPages\\t"+num+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\ThirdPages\\t741.html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\FristPages\\t"+num+".html");
-			file = new File("D:\\JavaWorkplace\\sogou\\data\\LastNewPage\\t"+num+".html");
+			file = new File("D:\\JavaWorkplace\\Sogou\\t.html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\LastNewPage\\t497.html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t"+num+".html");
 //			file = new File("D:\\JavaWorkplace\\sogou\\data\\pages\\t1408.html");
@@ -102,7 +102,7 @@ public class HtmlContentTurnPageRecognize {
 			if(!file.exists()||urls.get(url)!=null)
 			{
 				num++;
-				continue;
+//				continue;
 			}
 			reader = new BufferedReader(new FileReader(file));
 			tempString = null;
@@ -119,6 +119,7 @@ public class HtmlContentTurnPageRecognize {
 				tempString=null;
 				//break;
 			}
+			System.out.println(tempString);
 			Date date4 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 			        .parse(df.format(new Date()));
 			long end_read_time = date4.getTime();

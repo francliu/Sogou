@@ -161,7 +161,11 @@ public class HtmlContentDomTree implements ContentHandler {
 		}
 		String s = String.valueOf(ch, start, length);
 //		System.out.println(s);
-		if(s.length()>2000)return;
+		if(s.length()>2000)
+		{
+			is_abnormal_page = true;
+			return;
+		}
 		Element a = Allpath.peekLast();
         if(a.content.length()==0)a.content+=s;
 	}

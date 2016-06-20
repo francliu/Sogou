@@ -143,6 +143,11 @@ public class TurnPageRecognizeOffsumPageV3 extends Configured implements Tool {
 							continue;
 						}
 						decompresser.end();
+						if(resultLength>1024*256)
+						{
+							context.getCounter("debug", "resultLength > 1024*256").increment(1);
+							continue;
+						}
 						int len = resultLength < 50000 ? resultLength : 50000;
 						ByteArrayInputStream in = new ByteArrayInputStream(output);
 						Charset charset = codepageDetectorProxy.detectCodepage(in, len);

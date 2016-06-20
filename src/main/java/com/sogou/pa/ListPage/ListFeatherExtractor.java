@@ -75,9 +75,23 @@ public class ListFeatherExtractor {
 		writer.write("@attribute mid_other_area numeric\n");
 		writer.write("@attribute area_equal_max_num numeric\n");
 		writer.write("@attribute area_equal_max_area numeric\n");
+//------------------------------------------------------------
+		writer.write("@attribute FirstSituation numeric\n");
+		writer.write("@attribute SecondSituation numeric\n");
+		writer.write("@attribute ThridSituation numeric\n");
+		writer.write("@attribute FourSituation numeric\n");
+		writer.write("@attribute FiveSituation numeric\n");
+		writer.write("@attribute SixSituation numeric\n");
+		writer.write("@attribute SevenSituation numeric\n");
+		writer.write("@attribute EightSituation numeric\n");
+		writer.write("@attribute NineSituation numeric\n");
+		writer.write("@attribute TenSituation numeric\n");
 
-		writer.write("@attribute is_sub_title {true, false}\n");
-		
+		writer.write("@attribute Secondone numeric\n");
+		writer.write("@attribute Secondtwo numeric\n");
+		writer.write("@attribute Secondthree numeric\n");
+		writer.write("@attribute Secondfour numeric\n");
+		writer.write("@attribute Secondfive numeric\n");
 		writer.write("@attribute is_list {0, 1}\n");
 		writer.write("@data\n");
 		writer.flush();
@@ -147,7 +161,7 @@ public class ListFeatherExtractor {
 		writer2.write("@attribute area_equal_max_num numeric\n");
 		writer2.write("@attribute area_equal_max_area numeric\n");
 
-		writer2.write("@attribute is_sub_title {true, false}\n");
+//		writer2.write("@attribute is_sub_title {true, false}\n");
 		
 		writer2.write("@attribute is_list {0, 1}\n");
 		writer2.write("@data\n");

@@ -51,6 +51,5 @@
 @attribute mid_other_area numeric
 @attribute area_equal_max_num numeric
 @attribute area_equal_max_area numeric
-@attribute is_sub_title {true, false}
 @attribute is_list {0, 1}
 @data
